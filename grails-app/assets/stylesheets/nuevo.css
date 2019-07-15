@@ -1,0 +1,21 @@
+ .navbar {
+ 	background-color: white;
+ 	box-shadow: 2px 2px 5px #999;
+ 	color:black !important;
+}
+
+.navbar-default a {
+    color: black !important;
+    font-size: 18px !important;
+    text-decoration: none;
+}
+
+.header, .footer{
+	background-color:#c4c4d0;
+
+}
+
+a.navbar-brand{
+	text-decoration: none;
+	color:black !important;
+}

@@ -1,0 +1,21 @@
+@media print {
+
+	.navbar, .nav, .header, .footer, .buttons {
+    	display: none;
+  	}
+
+	body {
+		font-family: Georgia, ‘Times New Roman’, serif;
+	}
+
+	a:link {
+    	text-decoration: none;
+    	color: black;
+	}
+	.pagination{
+		display:none;
+
+	}
+}
+
+
