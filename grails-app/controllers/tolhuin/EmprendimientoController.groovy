@@ -9,6 +9,10 @@ class EmprendimientoController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
+    def visitante() {
+        respond emprendimientoService.list()
+    }
+
     def index() {
     respond emprendimientoService.list()
     }

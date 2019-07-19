@@ -90,8 +90,8 @@
 		<!-- Nav Item - Dashboard -->
 		<li class="nav-item active">
 			<a class="nav-link" href="/startbootstrap-sb-admin-2-gh-pages/index.html">
-				<i class="fas fa-fw fa-tachometer-alt"></i>
-				<span>Dashboard</span></a>
+				<i class="fas fa-map"></i>
+				<span>Mapa de Emprendimientos</span></a>
 		</li>
 
 		<!-- Divider -->
@@ -105,14 +105,14 @@
 		<!-- Nav Item - Pages Collapse Menu -->
 		<li class="nav-item">
 			<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-				<i class="fas fa-fw fa-cog"></i>
-				<span>Components</span>
+				<i class="fas fa-industry"></i>
+				<span>Emprendimientos</span>
 			</a>
 			<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 				<div class="bg-white py-2 collapse-inner rounded">
-					<h6 class="collapse-header">Custom Components:</h6>
-					<a class="collapse-item" href="/startbootstrap-sb-admin-2-gh-pages/buttons.html">Buttons</a>
-					<a class="collapse-item" href="/startbootstrap-sb-admin-2-gh-pages/cards.html">Cards</a>
+					<h6 class="collapse-header">Opciones:</h6>
+					<a class="collapse-item" href="/startbootstrap-sb-admin-2-gh-pages/buttons.html">Lista de Emprendimientos</a>
+					<a class="collapse-item" href="/startbootstrap-sb-admin-2-gh-pages/cards.html">Descargas</a>
 				</div>
 			</div>
 		</li>
@@ -120,24 +120,31 @@
 		<!-- Nav Item - Utilities Collapse Menu -->
 		<li class="nav-item">
 			<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-				<i class="fas fa-fw fa-wrench"></i>
-				<span>Utilities</span>
+				<i class="fas fa-user"></i>
+				<span>Usuarios</span>
 			</a>
 			<div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
 				<div class="bg-white py-2 collapse-inner rounded">
 					<h6 class="collapse-header">Custom Utilities:</h6>
-					<a class="collapse-item" href="/startbootstrap-sb-admin-2-gh-pages/utilities-color.html">Colors</a>
-					<a class="collapse-item" href="/startbootstrap-sb-admin-2-gh-pages/utilities-border.html">Borders</a>
-					<a class="collapse-item" href="/startbootstrap-sb-admin-2-gh-pages/utilities-animation.html">Animations</a>
-					<a class="collapse-item" href="/startbootstrap-sb-admin-2-gh-pages/utilities-other.html">Other</a>
+					<a class="collapse-item" href="/startbootstrap-sb-admin-2-gh-pages/utilities-color.html">Registrarse</a>
+					<a class="collapse-item" href="/startbootstrap-sb-admin-2-gh-pages/utilities-border.html">Iniciar Sesion</a>
+					<a class="collapse-item" href="/startbootstrap-sb-admin-2-gh-pages/utilities-animation.html">Recuperar contraseña</a>
+
 				</div>
 			</div>
+		</li>
+
+		<!-- Nav Item - Tables -->
+		<li class="nav-item">
+			<a class="nav-link" href="/startbootstrap-sb-admin-2-gh-pages/tables.html">
+			<i class="fas fa-fw fa-table"></i>
+			<span>Graficos</span></a>
 		</li>
 
 		<!-- Divider -->
 		<hr class="sidebar-divider">
 
-		<!-- Heading -->
+		%{--<!-- Heading -->
 		<div class="sidebar-heading">
 			Addons
 		</div>
@@ -169,15 +176,10 @@
 				<span>Charts</span></a>
 		</li>
 
-		<!-- Nav Item - Tables -->
-		<li class="nav-item">
-			<a class="nav-link" href="/startbootstrap-sb-admin-2-gh-pages/tables.html">
-				<i class="fas fa-fw fa-table"></i>
-				<span>Tables</span></a>
-		</li>
+
 
 		<!-- Divider -->
-		<hr class="sidebar-divider d-none d-md-block">
+		<hr class="sidebar-divider d-none d-md-block">--}%
 
 		<!-- Sidebar Toggler (Sidebar) -->
 		<div class="text-center d-none d-md-inline">
