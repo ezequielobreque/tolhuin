@@ -26,10 +26,10 @@
 %{--	<asset:stylesheet src="all2.css"/>--}%
     <script src="https://kit.fontawesome.com/172f22dc35.js"></script>
 
-
+	<asset:stylesheet src="all.min.css"/>
 
 	<!-- Custom styles for this template-->
-    <asset:stylesheet src="sb-admin-2.css"/>
+    <asset:stylesheet src="sb-admin-2.min.css"/>
     <g:layoutHead/>
 </head>
 <body id="page-top">
@@ -77,7 +77,7 @@
 	<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
 		<!-- Sidebar - Brand -->
-		<a class="sidebar-brand d-flex align-items-center justify-content-center" href="/startbootstrap-sb-admin-2-gh-pages/index.html">
+		<a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
 			<div class="sidebar-brand-icon">
 				<i class="fa grails-icon"><asset:image src="120px-COA_Tolhuin.svg.png"/></i>
 			</div>
@@ -204,7 +204,7 @@
 				<!-- Topbar Search -->
 				<form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
 					<div class="input-group">
-						<input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+						<input type="text" class="form-control bg-light border-0 small" placeholder="Bsucar Emprendimientos.." aria-label="Search" aria-describedby="basic-addon2">
 						<div class="input-group-append">
 							<button class="btn btn-primary" type="button">
 								<i class="fas fa-search fa-sm"></i>
@@ -422,14 +422,14 @@
 </div>
 
 <!-- Bootstrap core JavaScript-->
-<asset:javascript src="jquery-2.2.0.min.js"/>
+<asset:javascript src="jquery.min.js"/>
 <asset:javascript src="bootstrap.bundle.min.js"/>
-<asset:javascript src="sb-admin-2.min.js"/>
+
 
 
 <!-- Core plugin JavaScript-->
 <asset:javascript src="jquery.easing.min.js"/>
-
+<asset:javascript src="sb-admin-2.min.js"/>
 
 <!-- Page level plugins -->
 <asset:javascript src="Chart.min.js"/>
@@ -439,7 +439,7 @@
 <asset:javascript src="chart-area-demo.js"/>
 <asset:javascript src="chart-pie-demo.js"/>
 
-<asset:javascript src="application.js"/>
+%{--<asset:javascript src="application.js"/>--}%
 
 </body>
 </html>
