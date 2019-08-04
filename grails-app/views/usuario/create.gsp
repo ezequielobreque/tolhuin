@@ -26,12 +26,24 @@
             </ul>
             </g:hasErrors>
             <g:form resource="${this.usuario}" method="POST">
+
                 <fieldset class="form">
-                    <f:all bean="usuario"/>
+                    <f:all bean="usuario" except="tipo,contactos"/>
+                    <div class="crear">
+                    <label for="tipo">tipo
+                        <span class="required-indicator">*</span>
+                    </label>
+                    <select name="tipo" id="tipo">
+                        <option value="emprendedor">emprendedor</option>
+                        <option value="investigador">investigador</option>
+                    </select>
+                </div>
                 </fieldset>
                 <fieldset class="buttons">
+
                     <g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
                 </fieldset>
+
             </g:form>
         </div>
     </body>

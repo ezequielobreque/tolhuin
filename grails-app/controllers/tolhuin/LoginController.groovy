@@ -15,8 +15,10 @@ class LoginController {
 		render(view:"login")
 	}
 	def login(){}
-	def logout(){
-		session.logeado=false
+	def logout() {
+
+		session.logeado = false
+
 		redirect(controller: "main")
 	}
 

@@ -2,7 +2,6 @@ package tolhuin
 
 import grails.validation.ValidationException
 import static org.springframework.http.HttpStatus.*
-
 class UsuarioController {
 
     UsuarioService usuarioService
@@ -16,9 +15,11 @@ class UsuarioController {
 
     def show(Long id) {
         respond usuarioService.get(id)
+
     }
 
     def create() {
+
         respond new Usuario(params)
     }
 
@@ -35,12 +36,20 @@ class UsuarioController {
             return
         }
 
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'usuario.label', default: 'Usuario'), usuario.id])
-                redirect usuario
-            }
-            '*' { respond usuario, [status: CREATED] }
+        if (usuario!=null){
+            session["logeado"]=true
+            session["tipo"]=usuario.tipo
+            if(usuario.tipo=='emprendedor'){
+
+                flash.message = "Su usuario ha sido creado ahora ingrese los datos de su emprendimiento"
+
+                redirect(controller: "Emprendimiento", action: "create")
+
+
+            }else{redirect usuario}
+
+        }else{
+            flash.errorUsuario=true
         }
     }
 

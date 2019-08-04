@@ -6,6 +6,7 @@ class Usuario {
     String nombre
     String tipo
     String contrasena
+
     static hasMany=[contactos: Contacto]
     
     static constraints = {

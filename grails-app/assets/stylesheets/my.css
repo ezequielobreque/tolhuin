@@ -1,0 +1,19 @@
+.crear {
+    margin-top: 1em;
+
+}
+
+.crear label {
+    width: 25%;
+    text-align: right;
+}
+
+.crear img{
+
+    vertical-align: middle;
+    border-style: none;
+
+    margin-left: 25%;
+    max-width: 300px;
+    max-height: 300px;
+}

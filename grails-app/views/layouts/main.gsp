@@ -30,6 +30,7 @@
 
 	<!-- Custom styles for this template-->
     <asset:stylesheet src="sb-admin-2.min.css"/>
+	<asset:stylesheet src="my.css"/>
     <g:layoutHead/>
 </head>
 <body id="page-top">
@@ -89,7 +90,7 @@
 
 		<!-- Nav Item - Dashboard -->
 		<li class="nav-item active">
-			<a class="nav-link" href="/startbootstrap-sb-admin-2-gh-pages/index.html">
+			<a class="nav-link" href="/map/mapa">
 				<i class="fas fa-map"></i>
 				<span>Mapa de Emprendimientos</span></a>
 		</li>
@@ -111,8 +112,9 @@
 			<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 				<div class="bg-white py-2 collapse-inner rounded">
 					<h6 class="collapse-header">Opciones:</h6>
-					<a class="collapse-item" href="/startbootstrap-sb-admin-2-gh-pages/buttons.html">Lista de Emprendimientos</a>
+					<a class="collapse-item" href="/emprendimiento/index">Lista de Emprendimientos</a>
 					<a class="collapse-item" href="/startbootstrap-sb-admin-2-gh-pages/cards.html">Descargas</a>
+					<a class="collapse-item" href="/emprendimiento/create">Nuevo Emprendimiento</a>
 				</div>
 			</div>
 		</li>
@@ -126,8 +128,8 @@
 			<div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
 				<div class="bg-white py-2 collapse-inner rounded">
 					<h6 class="collapse-header">Custom Utilities:</h6>
-					<a class="collapse-item" href="/startbootstrap-sb-admin-2-gh-pages/utilities-color.html">Registrarse</a>
-					<a class="collapse-item" href="/startbootstrap-sb-admin-2-gh-pages/utilities-border.html">Iniciar Sesion</a>
+					<a class="collapse-item" href="/usuario/create">Registrarse</a>
+					<a class="collapse-item" href="/login/login">Iniciar Sesion</a>
 					<a class="collapse-item" href="/startbootstrap-sb-admin-2-gh-pages/utilities-animation.html">Recuperar contraseña</a>
 
 				</div>
@@ -136,9 +138,9 @@
 
 		<!-- Nav Item - Tables -->
 		<li class="nav-item">
-			<a class="nav-link" href="/startbootstrap-sb-admin-2-gh-pages/tables.html">
-			<i class="fas fa-fw fa-table"></i>
-			<span>Graficos</span></a>
+			<a class="nav-link" href="/grafico/index">
+				<i class="fas fa-fw fa-chart-area"></i>
+				<span>Graficos</span></a>
 		</li>
 
 		<!-- Divider -->
@@ -204,12 +206,13 @@
 				</button>
 
 				<!-- Topbar Search -->
-				<form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+
+				<form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" action="/emprendimiento/busqueda">
 					<div class="input-group">
-						<input type="text" class="form-control bg-light border-0 small" placeholder="Bsucar Emprendimientos.." aria-label="Search" aria-describedby="basic-addon2">
+						<input type="text" class="form-control bg-light border-0 small" name="buscar" id="buscar" placeholder="Bsucar Emprendimientos.." aria-label="Search" aria-describedby="basic-addon2">
 						<div class="input-group-append">
 							<button class="btn btn-primary" type="button">
-								<i class="fas fa-search fa-sm"></i>
+								<i type="submit" class="fas fa-search fa-sm"></i>
 							</button>
 						</div>
 					</div>

@@ -20,8 +20,11 @@
             <g:if test="${flash.message}">
                 <div class="message" role="status">${flash.message}</div>
             </g:if>
-            <f:table collection="${emprendimientoList}" />
-            
+
+
+            <f:table collection="${emprendimientoList}" except="featuredImageBytes,featuredImageContentType" />
+
+
             
         </div>
     </body>

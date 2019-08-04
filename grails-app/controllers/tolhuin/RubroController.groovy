@@ -2,7 +2,6 @@ package tolhuin
 
 import grails.validation.ValidationException
 import static org.springframework.http.HttpStatus.*
-
 class RubroController {
 
     RubroService rubroService

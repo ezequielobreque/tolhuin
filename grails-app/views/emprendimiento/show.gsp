@@ -19,13 +19,22 @@
             <g:if test="${flash.message}">
             <div class="message" role="status">${flash.message}</div>
             </g:if>
-            <f:display bean="emprendimiento" />
+            <div class="crear">
+            <g:if test="${this.emprendimiento.featuredImageBytes}">
+                <img src="<g:createLink controller="emprendimiento" action="featuredImage" id="${this.emprendimiento.id}"/>" width="400"/>
+            </g:if>
+            <f:display bean="emprendimiento" except="featuredImageBytes,featuredImageContentType" />
+
+        </div>
             <g:form resource="${this.emprendimiento}" method="DELETE">
                 <fieldset class="buttons">
                     <g:link class="edit" action="edit" resource="${this.emprendimiento}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
                     <input class="delete" type="submit" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
+                    <g:link class="fas fa-image" action="editFeaturedImage" resource="${this.emprendimiento}">agregar imagen del emprendimiento</g:link>
+
                 </fieldset>
+
             </g:form>
-        </div>
+            </div>
     </body>
 </html>

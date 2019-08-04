@@ -1,6 +1,5 @@
 package tolhuin
-
-class Emprendimiento {
+class Emprendimiento  {
     String nombre
     Double latitud
     Double longitud
@@ -10,11 +9,15 @@ class Emprendimiento {
     String foto
     Rubro rubro
     Ambito ambito
-    Detalle detalle
+    int telefono
+    //Detalle detalle
     Usuario investigador
-    
+    byte[] featuredImageBytes
+    String featuredImageContentType
+    String usuario;
     static constraints = {
         nombre()
+        usuario display:false,nullable: true
         latitud display: false, nullable:true
         longitud display: false, nullable:true
         direccion()
@@ -23,7 +26,13 @@ class Emprendimiento {
         foto nullable: true, display:false
         rubro()
         ambito()
-        detalle nullable:true
+        telefono nullable: true
+        //detalle nullable:true
         investigador display: false, nullable:true
+        featuredImageBytes nullable: true
+        featuredImageContentType nullable: true
+    }
+    static mapping = {
+        featuredImageBytes column: 'featured_image_bytes', sqlType: 'longblob'
     }
 }
