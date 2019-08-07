@@ -47,7 +47,29 @@ class ExcelImporterController {
 
                 values.each { v ->
                     if(v) {
+
+                        /*def nombre = ""
+
+                        if (v.nombre.isNull()) {
+
+                            nombre = ""
+
+                        } else {
+                            nombre = v.nombre
+                        }
+                        def local = ""
+
+                        if (v.local.isNull()){
+
+                            local=""
+
+                        }else
+
+                        {
+                            local=v.nombre
+                        }*/
                         def rubros=Rubro.findAll()
+
                         def ambito=Ambito.findByNombre(v.ambito)
                         def sector= Sector.findByNombre(v.sector)
                         if(!(v.rubro in(rubros.nombre))){

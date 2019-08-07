@@ -55,17 +55,17 @@ class BootStrap {
 		new Usuario(nombre: "abc", apellido: "def",nick:"admin", tipo: "administrador", contrasena:"admin" ).save()
 
 		new Usuario(nombre: "nuevo", apellido: "alguno",nick:"normal", tipo: "emprendedor", contrasena:"normal" ).save()
-    	def primario=new Sector(nombre:"primario")
-    	def secundario=new Sector(nombre:"secundario")
-    	def terciario=new Sector(nombre:"terciario")
+    	def primario=new Sector(nombre:"PRIMARIO")
+    	def secundario=new Sector(nombre:"SECUNDARIO")
+    	def terciario=new Sector(nombre:"TERCIARIO")
     	primario.save()
     	secundario.save()
     	terciario.save()
-    	def publico=new Ambito(nombre: "público")
-    	def privado=new Ambito(nombre: "privado")
+    	def publico=new Ambito(nombre: "ESTATAL")
+    	def privado=new Ambito(nombre: "PRIVADO")
     	publico.save()
     	privado.save()
-    	def forestal=new Rubro(nombre:"forestal")
+    	def forestal=new Rubro(nombre:"FORESTAL")
     	def panaderia=new Rubro(nombre: "panadería")
     	def horticola=new Rubro(nombre: "horticola")
     	def ganadero=new Rubro(nombre: "ganadero")
@@ -104,7 +104,7 @@ class BootStrap {
 
 		def HORTÍCOLA=new Rubro(nombre: "HORTÍCOLA")
 		HORTÍCOLA.save()
-
+		/*
 		FORESTAL
 		GANADERO
 		TURBERO
@@ -165,7 +165,7 @@ class BootStrap {
 		AGRIMENSURA
 		ESTUDIO JURIDICO
 		CARPINTERIA
-
+		*/
 
 
 		new Emprendimiento(nombre:"aserradero1", latitud: 1.1, longitud: 2.2, direccion:"abc 123", validado:true, habilitado:true,rubro:forestal, ambito:privado).save()

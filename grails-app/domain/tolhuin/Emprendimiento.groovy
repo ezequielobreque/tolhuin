@@ -14,22 +14,23 @@ class Emprendimiento  {
     Usuario investigador
     byte[] featuredImageBytes
     String featuredImageContentType
-    String usuario;
+    String usuario
     static constraints = {
-        nombre()
-        usuario display:false,nullable: true
+        nombre display:true,nullable: true,unique:['direccion','usuario']
+        usuario display:true,nullable: true,unique: ['direccion','nombre']
         latitud display: false, nullable:true
         longitud display: false, nullable:true
-        direccion()
+        direccion nullable: true;
         validado display: false, nullable:true
-        habilitado()
+        habilitado nullable: true;
         foto nullable: true, display:false
-        rubro()
-        ambito()
+        rubro nullable: true
+        ambito nullable: true
         telefono nullable: true
         //detalle nullable:true
         investigador display: false, nullable:true
         featuredImageBytes nullable: true
+
         featuredImageContentType nullable: true
     }
     static mapping = {
