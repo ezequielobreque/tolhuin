@@ -1,3 +1,4 @@
+<%@ page import="tolhuin.Rubro" %>
 <!doctype html>
 <html lang="es" class="no-js">
 <head>
@@ -107,7 +108,7 @@
 		<li class="nav-item">
 			<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
 				<i class="fas fa-industry"></i>
-				<span>Emprendimientos</span>
+				<span> Emprendimientos </span>
 			</a>
 			<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 				<div class="bg-white py-2 collapse-inner rounded">
@@ -194,9 +195,11 @@
 	<!-- Content Wrapper -->
 	<div id="content-wrapper" class="d-flex flex-column">
 
-		<!-- Main Content -->
-		<div id="content">
 
+	<!-- Main Content -->
+	 <div class="content2" >
+	   %{--<div class="content2">--}%
+			%{--<div class="content3">--}%
 			<!-- Topbar -->
 			<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
@@ -207,15 +210,35 @@
 
 				<!-- Topbar Search -->
 
-				<form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" action="/emprendimiento/busqueda">
+				<form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" method="get" action="/emprendimiento/busqueda">
 					<div class="input-group">
 						<input type="text" class="form-control bg-light border-0 small" name="buscar" id="buscar" placeholder="Bsucar Emprendimientos.." aria-label="Search" aria-describedby="basic-addon2">
 						<div class="input-group-append">
-							<button class="btn btn-primary" type="button">
-								<i type="submit" class="fas fa-search fa-sm"></i>
+							<button class="btn btn-primary" type="submit">
+								<i class="fas fa-search fa-sm"></i>
 							</button>
 						</div>
+
 					</div>
+	<select class="form-control form-control-sm" style="width: 80px" name="rubro">
+		<option disabled selected value>Rubro..</option>
+		<g:each in="${tolhuin.Rubro.list()}">
+			<option value="${it.nombre}">${it.nombre}</option>
+		</g:each>
+
+	</select>
+	<select class="form-control form-control-sm" name="ambito">
+		<option disabled selected value>Ambito..</option>
+		<option value="PRIVADO">Privado</option>
+		<option value="ESTATAL">Estatal</option>
+
+	</select>
+	<select class="form-control form-control-sm" name="sector">
+		<option disabled selected value>Sector..</option>
+		<option value="PRIMARIO">Primario</option>
+		<option value="SECUNDARIO">Secundario</option>
+		<option value="TERCIARIO">Terciario</option>
+	</select>
 				</form>
 
 				<!-- Topbar Navbar -->
@@ -382,8 +405,9 @@
 			<!-- End of Topbar -->
 
 			<g:layoutBody/>
+       %{--</div>--}%
+	%{--</div>--}%
 </div>
-
 <!-- End of Main Content -->
 
 <!-- Footer -->

@@ -36,7 +36,7 @@
             </div>
             <div class="card-body">
                 <div class="chart-container" style=" height:100%; width: 100%">
-                    <canvas id="myChart" responsive=true></canvas>
+                    <canvas id="myChart2" responsive=true></canvas>
                 </div>
             </div>
         </div>
@@ -47,7 +47,7 @@
 
 
 
-            var ctx = document.getElementById("myChart").getContext('2d');
+            var ctx = document.getElementById("myChart2").getContext('2d');
             data = ${raw(data)};
             var myPieChart = new Chart(ctx,{
                 type: 'pie',
@@ -65,11 +65,20 @@
             });
 
             var ctx2 = document.getElementById("myBarChart").getContext('2d');
-
-            var myBarChart = new Chart(ctx, {
+            data2 = ${raw(data2)};
+            var myBarChart = new Chart(ctx2, {
                 type: 'bar',
                 data: data2,
-                options: options
+                options: {
+                    layout: {
+                        padding: {
+                            left: 0,
+                            right: 0,
+                            top: 0,
+                            bottom: 0
+                        }
+                    }
+                }
             });
             </script>
 

@@ -1,38 +1,36 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
-
     <meta name="layout" content="main" />
-    <link rel="stylesheet" href="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/css/ol.css" type="text/css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
+          integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+          crossorigin=""/>
 
-    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
+            integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
+            crossorigin=""></script>
+    <asset:javascript src="leaflet-providers.js"/>
+    <meta charset="UTF-8">
+    <title>Title</title>
     <style>
+    #mapid { height: 100%;
+        width:100%;
 
-    #map {
-        height: 100%;
-        width: 100%;
-    }
-    #marker {
-        width: 20px;
-        height: 20px;
-        border: 1px solid #088;
-        border-radius: 10px;
-        background-color: #0FF;
-        opacity: 0.5;
-    }
-    #vienna {
-        text-decoration: none;
-        color: white;
-        font-size: 11pt;
-        font-weight: bold;
-        text-shadow: black 0.1em 0.1em 0.2em;
-    }
 
+                }
+
+    .leaflet-popup-content-wrapper, .leaflet-popup-tip {
+        background: transparent;
+
+    }
     .boxcode {
         -webkit-box-sizing: content-box;
         -moz-box-sizing: content-box;
         box-sizing: content-box;
-        width: 160px;
+        max-width: 250px;
+        max-height: 250px;
         padding: 20px;
         overflow: hidden;
         border: 1px solid;
@@ -58,118 +56,117 @@
         text-shadow: 1px 1px 1px rgba(0,0,0,0.2) ;
         text-shadow: 1px 1px 1px rgba(0,0,0,0.2) ;
     }
-
     </style>
-
-    <link rel="stylesheet" href="https://openlayers.org/en/v5.3.0/css/ol.css" type="text/css">
-
-    <script src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/build/ol.js"></script>
-    <title>OpenLayers example</title>
 </head>
 <body>
-<div id="map"></div>
-    <a class="overlay" id="vienna" target="_blank" href="">Vienna</a>
-    <div id="marker" title="Marker"></div>
-<div id="popup" class="ol-popup">
-    <a href="#" id="popup-closer" class="ol-popup-closer"></a>
-    <div id="popup-content"></div>
-</div>
-<script type="text/javascript">
 
-    var map = new ol.Map({
-        target: 'map',
-        layers: [
-            new ol.layer.Tile({
-                source: new ol.source.OSM()
-            })
-        ],
-        view: new ol.View({
-            center: ol.proj.fromLonLat([-67.1955032,-54.5108299]),
-
-            zoom: 16
-        })
-    });
+<div id="mapid"></div>
 
 
 
 
 
-    var layer = new ol.layer.Vector({
-        source: new ol.source.Vector({
-            features: [
-                new ol.Feature({
-                    geometry: new ol.geom.Point(ol.proj.fromLonLat([-67.1955032, -54.5108299]))
-                })
-            ]
-        })
-    });
-    map.addLayer(layer);
 
 
-    var container = document.getElementById('popup');
-    var content = document.getElementById('popup-content');
-    var closer = document.getElementById('popup-closer');
 
-    var overlay = new ol.Overlay({
-        element: container,
-        autoPan: true,
-        autoPanAnimation: {
-            duration: 250
+<script>
+
+    var mymap = L.map('mapid').setView([-54.5108299, -67.1955032], 13);
+    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+        maxZoom: 18,
+        id: 'mapbox.streets',
+        accessToken: 'pk.eyJ1IjoidGh4YXhlIiwiYSI6ImNqejNmaXk4dzAyeWYzcG9ldjZoN2s2Z2oifQ.odq5qehRuqIb2nU8HALFqg'
+    }).addTo(mymap);
+    L.tileLayer.provider('OpenTopoMap').addTo(mymap);
+
+   /* var marker = L.marker([-54.5108, -67.19550]).addTo(mymap);*/
+    /*var marker2 = L.marker([-54.50, -67.190]).addTo(mymap);*/
+    /*var circle = L.circle([-54.510829, -67.19550], {
+        color: 'red',
+        fillColor: '#f03',
+        fillOpacity: 0.5,
+        radius: 500
+    }).addTo(mymap);*/
+
+    /*var polygon = L.polygon([
+        [51.509, -0.08],
+        [51.503, -0.06],
+        [51.51, -0.047]
+    ]).addTo(mymap);*/
+    list = ${raw(list)};
+    emp = ${raw(emp)};
+    if(emp==null){
+
+        if(list!=null) {
+
+            list.forEach(myFunction);
+
+            function myFunction(item) {
+                if (item.longitud!=null && item.latitud!=null){
+
+                var marker = L.marker([item.latitud,item.longitud]).addTo(mymap);
+
+                marker.bindPopup("<div class='boxcode'>" +
+                    '<div class="col-sm-12">'+
+                    '<div class="card text-white bg-success mb-3" style="max-width: 250px;max-height: 250px">'+
+                        "<h3>"+item.nombre+"<h3>" +
+                    "<br>" +
+
+
+                    "<a>Ambito:"+item.ambito+"</a>"+
+                        "<br>"+
+                    "<a>Rubro:"+item.rubro+"</a>"+
+                        "<br>"+
+
+                    "<a> Direccion:"+item.direccion+"</a>" +
+                    "</div>"   );
+
+
+
+
+                }
+
+
+
+                /*sum += item;
+                document.getElementById("demo").innerHTML = sum;*/
+            }
+
+            /*marker.bindPopup("<div class='boxcode'><a>Hello world!<br><a>I am a popup.</a></div>");
+            marker2.bindPopup("<div class='boxcode'><a>Hello world!<br><a>I am a popup.</a></div>");*/
+
         }
-    });
-    map.addOverlay(overlay);
 
-    closer.onclick = function() {
-        overlay.setPosition(undefined);
-        closer.blur();
-        return false;
+        }else{
+        var marker = L.marker([-54.5108, -67.19550]).addTo(mymap);
+    marker.bindPopup("<div class='boxcode'><a>" + emp.nombre + "</a><br><a>I am a popup.</a></div>");
+    }
+    /*circle.bindPopup("I am a circle.");
+    polygon.bindPopup("I am a polygon.");
+
+    var popup = L.popup()
+        .setLatLng([51.5, -0.09])
+        .setContent("I am a standalone popup.")
+        .openOn(mymap);*/
+
+
+
+    var popup = L.popup();
+
+    function onMapClick(e) {
+        popup
+            .setLatLng(e.latlng)
+            .setContent("You clicked the map at " + e.latlng.toString())
+            .openOn(mymap);
     }
 
-    map.on('singleclick', function (event) {
-        if (map.hasFeatureAtPixel(event.pixel) === true) {
-            var coordinate = event.coordinate;
-
-            content.innerHTML = '<div class="boxcode"><b>Hello world!</b><br />I am a popup.</div>';
-            overlay.setPosition(coordinate);
-        } else {
-            overlay.setPosition(undefined);
-            closer.blur();
-        }
-    });
-
-    var pos = ol.proj.fromLonLat([-67.1955032, -54.5108299]);
-
-    var marker = new ol.Overlay({
-        position: pos,
-        positioning: 'center-center',
-        element: document.getElementById('marker'),
-        stopEvent: false
-    });
-    map.addOverlay(marker);
-
-    // Vienna label
-    var vienna = new ol.Overlay({
-        position: pos,
-        element: document.getElementById('vienna')
-    });
-    map.addOverlay(vienna);
-
-
-    map.on('click', function(evt){
-        console.info(evt.pixel);
-        console.info(map.getPixelFromCoordinate(evt.coordinate));
-        console.info(ol.proj.toLonLat(evt.coordinate));
-        var coords = ol.proj.toLonLat(evt.coordinate);
-        var lat = coords[1];
-        var lon = coords[0];
-        var locTxt = "Latitude: " + lat + " Longitude: " + lon;
-        // coords is a div in HTML below the map to display
-        document.getElementById('coords').innerHTML = locTxt;
-    });
-
+    mymap.on('click', onMapClick);
 
 </script>
 
-<asset:javascript src="ol-popup.js"/>
+
+
 </body>
+
 </html>

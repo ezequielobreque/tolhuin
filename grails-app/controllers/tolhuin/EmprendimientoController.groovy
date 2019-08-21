@@ -13,9 +13,49 @@ class EmprendimientoController {
     def visitante() {
         respond emprendimientoService.list()
     }
-    def busqueda(String buscar) {
-        def List=Emprendimiento.findAllByNombreLike('%'+ buscar +'%')
-        print(List)
+    def busqueda(String buscar,String rubro,String ambito,String sector) {
+
+        def amb=Ambito.findByNombreLike('%'+ambito+'%')
+        def rub=Rubro.findByNombreLike('%'+rubro+'%')
+
+        def sec=Sector.findByNombreLike('%'+sector+'%')
+        print (sec)
+        def List=Emprendimiento.findAllByNombreLike('%' + buscar + '%')
+        /*if (amb!=null && rub!=null) {
+
+            List = Emprendimiento.findAllByNombreLikeAndAmbitoAndRubro('%' + buscar + '%', amb, rub)
+        }else
+            if(amb!=null&& rub==null){
+
+                List = Emprendimiento.findAllByNombreLikeAndAmbito('%' + buscar + '%', amb)
+            }
+        else if(rub!=null && amb==null){
+
+                List = Emprendimiento.findAllByNombreLikeAndRubro('%' + buscar + '%', rub)
+
+            }else if(rub==null && amb==null)
+                {
+
+                    List = Emprendimiento.findAllByNombreLike('%' + buscar + '%')
+
+                }*/
+        if (amb!=null){
+            List=List.findAll { it.ambito == amb }
+
+        }
+        if (rub!=null){
+            List=List.findAll { it.rubro == rub }
+
+        }
+        if (sec!=null) {
+
+
+            print(List.rubro.sector.nombre)
+          List=List.findAll { it.rubro.sector.nombre == sec.nombre }
+
+        }
+
+
         [list:List]
 
 

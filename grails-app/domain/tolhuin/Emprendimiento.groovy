@@ -11,6 +11,7 @@ class Emprendimiento  {
     Ambito ambito
     int telefono
     //Detalle detalle
+    String descripcion
     Usuario investigador
     byte[] featuredImageBytes
     String featuredImageContentType
@@ -20,6 +21,7 @@ class Emprendimiento  {
         usuario display:true,nullable: true,unique: ['direccion','nombre']
         latitud display: false, nullable:true
         longitud display: false, nullable:true
+        descripcion display:true, nullable: true
         direccion nullable: true;
         validado display: false, nullable:true
         habilitado nullable: true;

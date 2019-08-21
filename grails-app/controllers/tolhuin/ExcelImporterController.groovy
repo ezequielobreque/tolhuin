@@ -2,6 +2,7 @@ package tolhuin
 import org.apache.poi.xssf.usermodel.XSSFWorkbook
 import static org.apache.poi.ss.usermodel.Cell.*
 import java.io.File
+import groovy.json.*
 class ExcelImporterController {
 
     EmprendimientoService emprendimientoService
@@ -79,9 +80,32 @@ class ExcelImporterController {
                         }
 
 
+                        def latitud
+                        def longitud
+                        def get = new URL("https://geocoder.api.here.com/6.2/geocode.json?app_id=yRbrv8bfdmGRDhUlolXl&app_code=LzSuSfgDM53H-Bc1YCMU-g&searchtext="+ v.direccion +"+tolhuin+argentina+tierra+del+fuego").openConnection();
+                        def getRC = get.getResponseCode();
+                        println(getRC)
+                        if(getRC.equals(200)) {
+                            println()
+
+                            String jsonString = get.getInputStream().getText()
+                            JsonSlurper slurper = new JsonSlurper()
+                            Map parsedJson = slurper.parseText(jsonString)
+
+                            latitud=parsedJson.Response.View.Result.Location.DisplayPosition.Latitude[0][0]
+
+                            longitud=parsedJson.Response.View.Result.Location.DisplayPosition.Longitude[0][0]
+                        }else
+                        {
+                            latitud=(-54.00-Math.random())
+                            longitud=(-67.00-Math.random())
+
+                        }
+
+
                         def rubro=Rubro.findByNombre(v.rubro)
 
-                        emprendimientoService.save(Emprendimiento.findByNombre(v.nro)?: new Emprendimiento(usuario:v.nombre,habilitado: true,nombre: v.local,direccion: v.direccion,rubro:rubro,ambito:ambito))
+                        emprendimientoService.save(Emprendimiento.findByNombre(v.nro)?: new Emprendimiento(usuario:v.nombre,habilitado: true,nombre: v.local,direccion: v.direccion,rubro:rubro,ambito:ambito,longitud: longitud,latitud:latitud))
 
                     }
 

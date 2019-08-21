@@ -168,15 +168,15 @@ class BootStrap {
 		*/
 
 
-		new Emprendimiento(nombre:"aserradero1", latitud: 1.1, longitud: 2.2, direccion:"abc 123", validado:true, habilitado:true,rubro:forestal, ambito:privado).save()
-    	new Emprendimiento(nombre:"huerta a", latitud: 1.1, longitud: 2.2, direccion:"abc def", validado:true, habilitado:true,rubro:horticola, ambito:privado).save()
-    	new Emprendimiento(nombre:"vacas", latitud: 1.1, longitud: 2.2, direccion:"zxc ef", validado:true, habilitado:true,rubro:ganadero, ambito:privado).save()
-    	new Emprendimiento(nombre:"huerta b", latitud: 1.1, longitud: 2.2, direccion:"abc cda", validado:true, habilitado:true,rubro:horticola, ambito:privado).save()
-    	new Emprendimiento(nombre:"artemania", latitud: 1.1, longitud: 2.2, direccion:"abc 123", validado:true, habilitado:true,rubro:artesanias, ambito:privado).save()
-    	new Emprendimiento(nombre:"madera", latitud: 1.1, longitud: 2.2, direccion:"abc 123", validado:true, habilitado:true,rubro:carpinteria, ambito:privado).save()
-    	new Emprendimiento(nombre:"centro de tolhuin", latitud: 1.1, longitud: 2.2, direccion:"abc 123", validado:true, habilitado:true,rubro:panaderia, ambito:privado).save()
-    	new Emprendimiento(nombre:"polirubro abcde", latitud: 1.1, longitud: 2.2, direccion:"abc 123", validado:true, habilitado:true,rubro:polirrubro, ambito:privado).save()
-    	new Emprendimiento(nombre:"restaurant", latitud: 1.1, longitud: 2.2, direccion:"abc 123", validado:true, habilitado:true,rubro:gastronomico, ambito:privado).save()
+		new Emprendimiento(nombre:"aserradero1", latitud: -54.5210, longitud: -67.2182, direccion:"abc 123", validado:true, habilitado:true,rubro:forestal,descripcion: "el mejor lugar para cortar leña de la cuidad", ambito:privado).save()
+    	new Emprendimiento(nombre:"huerta a", latitud: -54.5120, longitud: -67.1950, direccion:"abc def", validado:true, habilitado:true,rubro:horticola, ambito:privado).save()
+    	new Emprendimiento(nombre:"vacas", latitud: -54.5050, longitud: -67.1990, direccion:"zxc ef", validado:true, habilitado:true,rubro:ganadero, ambito:privado).save()
+    	new Emprendimiento(nombre:"huerta b", latitud: -54.4990, longitud: -67.2082, direccion:"abc cda", validado:true, habilitado:true,rubro:horticola, ambito:privado).save()
+    	new Emprendimiento(nombre:"artemania", latitud: -54.4890, longitud: -67.1982, direccion:"abc 123", validado:true, habilitado:true,rubro:artesanias, ambito:privado).save()
+    	new Emprendimiento(nombre:"madera", latitud: -54.4810, longitud: -67.1982, direccion:"abc 123", validado:true, habilitado:true,rubro:carpinteria, ambito:privado).save()
+    	new Emprendimiento(nombre:"centro de tolhuin", latitud: -54.5040, longitud: -67.2282, direccion:"abc 123", validado:true, habilitado:true,rubro:panaderia, ambito:privado).save()
+    	new Emprendimiento(nombre:"polirubro abcde", latitud: -54.5030, longitud: -67.1882, direccion:"abc 123", validado:true, habilitado:true,rubro:polirrubro, ambito:privado).save()
+    	new Emprendimiento(nombre:"restaurant", latitud: -54.5060, longitud: -67.20, direccion:"abc 123", validado:true, habilitado:true,rubro:gastronomico, ambito:privado).save()
 
     }
 }

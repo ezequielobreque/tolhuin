@@ -1,7 +1,7 @@
 package tolhuin
 
 class Rubro {
-    String nombre
+    String nombre ;
     static hasMany=[detalles:Detalle]
     static belongsTo=[sector:Sector]
 

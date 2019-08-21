@@ -2,35 +2,56 @@
 <html>
     <head>
         <meta name="layout" content="main" />
+        <asset:stylesheet src="mycss.css"/>
 
-        <title>Página principal</title>
-    </head>
-<body>
+         <title>Página principal</title>
+     </head>
 
-		%{--<f:table collection="${emprendimientoList}" />--}%
+ <body>
 
 
+ %{--<f:table collection="${emprendimientoList}" />--}%
 <div class="row">
 <g:each in="${emprendimientoList}">
 
-        <div class="col-sm-6">
-            <div class="card text-white bg-success mb-3" style="max-width: 25rem;">
-                <g:if test="${it.featuredImageBytes}">
-                    <img  class="card-img-top" src="<g:createLink controller="emprendimiento" action="featuredImage" id="${it.id}"/>" alt="Card image cap" style="height: 300px"/>
-                </g:if>
-                <g:else>
 
-                    <g:img dir="images" file="no imagen.png" height="250"/>
-                </g:else>
+        <div class="col-sm-12 col-xl-3 col-md-6 col-lg-4 ">
+            <div class="card" style="width: 100%;">
+            <g:if test="${it.featuredImageBytes}">
+            <img  class="card-img-top" src="<g:createLink controller="emprendimiento" action="featuredImage" id="${it.id}"/>" alt="Card image cap" style="height: 12REM"/>
+        </g:if>
+            <g:else>
+                <img src="/assets/no imagen.png" style="height: 12rem"/>
+
+            </g:else>
 
         <div class="card-body">
 
-            <h1><a href="emprendimiento/show/${it.id}">${it.nombre}</a></h1>
-
-            <p>Direccion: ${it.direccion}</p>
-            <a>Ambito:${it.ambito.nombre} </a>
+            <h1 style="text-align: center" ><a href="emprendimiento/show/${it.id}"style="color:red;">${it.nombre}</a></h1>
             <br>
-            <a>Rubro:${it.rubro.nombre} </a>
+            <a style="color: black;font-size:1.2em">${it.descripcion} </a>
+            <br>
+            <p>Direccion: ${it.direccion}</p>
+            <p>Ambito: ${it.ambito.nombre} </p>
+
+            <p>Rubro: ${it.rubro.nombre} </p>
+            <div class="row">
+            <div class="col-6">
+                <form action="map/mapa">
+                    <button type="submit" name="id" value="${it.id}"     class="btn btn-success" style="align-content:center ">
+                <i class="fas fa-map"> mapa</i>
+                    </button>
+                </form>
+            </div>
+            <div class="col-6">
+                <form action="emprendimiento/show/${it.id}">
+                <button type="submit"  class="btn btn-primary" style="align-content:center ">
+                    <i class="fas fa-sign-in-alt"> visitar</i>
+                </button>
+                </form>
+
+            </div>
+            </div>
         </div>
     </div>
         </div>
