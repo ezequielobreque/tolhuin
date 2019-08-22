@@ -14,7 +14,7 @@
 
 
     <div class="row">
-        <div class="col-xl-5 col-lg-5">
+        <div class="col-xl-5 col-lg-5" style="opacity: 0.96">
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
                     <h6 class="m-0 font-weight-bold text-primary">bar char</h6>
@@ -29,7 +29,7 @@
 
 
 
-        <div class="col-xl-7 col-lg-7">
+        <div class="col-xl-7 col-lg-7" style="opacity: 0.96">
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">Emprendimientos por sector</h6>

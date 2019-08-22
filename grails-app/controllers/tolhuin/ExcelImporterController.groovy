@@ -70,7 +70,11 @@ class ExcelImporterController {
                             local=v.nombre
                         }*/
                         def rubros=Rubro.findAll()
-
+                        def local=v.local;
+                        print(v.local)
+                        if (local==null){
+                            local="negocio de " + v.nombre
+                        }
                         def ambito=Ambito.findByNombre(v.ambito)
                         def sector= Sector.findByNombre(v.sector)
                         if(!(v.rubro in(rubros.nombre))){
@@ -82,30 +86,29 @@ class ExcelImporterController {
 
                         def latitud
                         def longitud
-                        def get = new URL("https://geocoder.api.here.com/6.2/geocode.json?app_id=yRbrv8bfdmGRDhUlolXl&app_code=LzSuSfgDM53H-Bc1YCMU-g&searchtext="+ v.direccion +"+tolhuin+argentina+tierra+del+fuego").openConnection();
+                        String direcion=v.direccion
+                        String dire= direcion.replaceAll("[^A-Za-z0-9]", "+")
+                        print(dire)
+                        def get = new URL("https://geocoder.api.here.com/6.2/geocode.json?app_id=yRbrv8bfdmGRDhUlolXl&app_code=LzSuSfgDM53H-Bc1YCMU-g&searchtext=" +dire+ "+tolhuin+tierra+del+fuego").openConnection();
                         def getRC = get.getResponseCode();
-                        println(getRC)
-                        if(getRC.equals(200)) {
-                            println()
+                            println(getRC)
+                            if(getRC.equals(200)){
+                                String jsonString = get.getInputStream().getText()
+                                JsonSlurper slurper = new JsonSlurper()
+                                Map parsedJson = slurper.parseText(jsonString)
 
-                            String jsonString = get.getInputStream().getText()
-                            JsonSlurper slurper = new JsonSlurper()
-                            Map parsedJson = slurper.parseText(jsonString)
+                                latitud=(parsedJson.Response.View.Result.Location.DisplayPosition.Latitude[0][0])
 
-                            latitud=parsedJson.Response.View.Result.Location.DisplayPosition.Latitude[0][0]
+                                longitud=(parsedJson.Response.View.Result.Location.DisplayPosition.Longitude[0][0])
 
-                            longitud=parsedJson.Response.View.Result.Location.DisplayPosition.Longitude[0][0]
-                        }else
-                        {
-                            latitud=(-54.00-Math.random())
-                            longitud=(-67.00-Math.random())
+                            }else{
+                                latitud=(-54.0000-Math.random())
+                                longitud=(-54.0000-Math.random())
 
-                        }
-
-
+                            }
                         def rubro=Rubro.findByNombre(v.rubro)
 
-                        emprendimientoService.save(Emprendimiento.findByNombre(v.nro)?: new Emprendimiento(usuario:v.nombre,habilitado: true,nombre: v.local,direccion: v.direccion,rubro:rubro,ambito:ambito,longitud: longitud,latitud:latitud))
+                        emprendimientoService.save(Emprendimiento.findByNombre(v.nro)?: new Emprendimiento(usuario:v.nombre,habilitado: true,nombre: local,direccion: v.direccion,rubro:rubro,ambito:ambito,longitud: longitud,latitud:latitud))
 
                     }
 

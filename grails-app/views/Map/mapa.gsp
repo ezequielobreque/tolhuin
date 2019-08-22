@@ -139,7 +139,7 @@
         }
 
         }else{
-        var marker = L.marker([-54.5108, -67.19550]).addTo(mymap);
+        var marker = L.marker([emp.latitud, emp.longitud]).addTo(mymap);
     marker.bindPopup("<div class='boxcode'><a>" + emp.nombre + "</a><br><a>I am a popup.</a></div>");
     }
     /*circle.bindPopup("I am a circle.");

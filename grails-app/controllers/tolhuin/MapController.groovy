@@ -6,11 +6,14 @@ class MapController {
 
     def index() { }
     def mapi(){
-        def get = new URL("https://geocoder.api.here.com/6.2/geocode.json?app_id=yRbrv8bfdmGRDhUlolXl&app_code=LzSuSfgDM53H-Bc1YCMU-g&searchtext=tolhuin+argentina+tierra+del+fuego").openConnection();
+        String direcion='Gobernador Campos N°1416'
+       String dire= direcion.replaceAll("[^A-Za-z0-9]", "+")
+        print(dire)
+        def get = new URL("https://geocoder.api.here.com/6.2/geocode.json?app_id=yRbrv8bfdmGRDhUlolXl&app_code=LzSuSfgDM53H-Bc1YCMU-g&searchtext=" +dire+ "+tolhuin+tierra+del+fuego").openConnection();
         def getRC = get.getResponseCode();
         println(getRC)
         if(getRC.equals(200)) {
-            println();
+            println()
 
             String jsonString = get.getInputStream().getText()
             JsonSlurper slurper = new JsonSlurper()
