@@ -19,7 +19,7 @@
         width:100%;
 
 
-                }
+    }
 
     .leaflet-popup-content-wrapper, .leaflet-popup-tip {
         background: transparent;
@@ -77,94 +77,76 @@
         maxZoom: 18,
         id: 'mapbox.streets',
         accessToken: 'pk.eyJ1IjoidGh4YXhlIiwiYSI6ImNqejNmaXk4dzAyeWYzcG9ldjZoN2s2Z2oifQ.odq5qehRuqIb2nU8HALFqg'
-    }).addTo(mymap);
+    }).addTo(mymap)
+
     /*L.tileLayer.provider('OpenTopoMap').addTo(mymap);*/
 
 
 
+    /*var map = L.map('mapid')*/
+    /*function addToMapPlano(){
+    var nombre=L.tileLayer.wms('http://catastro.tolhuin.gob.ar/geoserver/ows?',{
 
-   /* var marker = L.marker([-54.5108, -67.19550]).addTo(mymap);*/
-    /*var marker2 = L.marker([-54.50, -67.190]).addTo(mymap);*/
-    /*var circle = L.circle([-54.510829, -67.19550], {
-        color: 'red',
-        fillColor: '#f03',
-        fillOpacity: 0.5,
-        radius: 500
-    }).addTo(mymap);*/
-
-    /*var polygon = L.polygon([
-        [51.509, -0.08],
-        [51.503, -0.06],
-        [51.51, -0.047]
-    ]).addTo(mymap);*/
-    list = ${raw(list)};
-    emp = ${raw(emp)};
-    if(emp==null){
-
-        if(list!=null) {
-
-            list.forEach(myFunction);
-
-            function myFunction(item) {
-                if (item.longitud!=null && item.latitud!=null){
-
-                var marker = L.marker([item.latitud,item.longitud]).addTo(mymap);
-
-                marker.bindPopup("<div class='boxcode'>" +
-                    '<div class="col-sm-12">'+
-                    '<div class="card text-white bg-success mb-3" style="max-width: 250px;max-height: 250px">'+
-                        "<h3>"+item.nombre+"<h3>" +
-                    "<br>" +
-
-
-                    "<a>Ambito:"+item.ambito+"</a>"+
-                        "<br>"+
-                    "<a>Rubro:"+item.rubro+"</a>"+
-                        "<br>"+
-
-                    "<a> Direccion:"+item.direccion+"</a>" +
-                    "</div>"   );
-
-
-
-
-                }
-
-
-
-                /*sum += item;
-                document.getElementById("demo").innerHTML = sum;*/
-            }
-
-            /*marker.bindPopup("<div class='boxcode'><a>Hello world!<br><a>I am a popup.</a></div>");
-            marker2.bindPopup("<div class='boxcode'><a>Hello world!<br><a>I am a popup.</a></div>");*/
-
-        }
-
-        }else{
-        var marker = L.marker([emp.latitud, emp.longitud]).addTo(mymap);
-    marker.bindPopup("<div class='boxcode'><a>" + emp.nombre + "</a><br><a>I am a popup.</a></div>");
-    }
-    /*circle.bindPopup("I am a circle.");
-    polygon.bindPopup("I am a polygon.");
-
-    var popup = L.popup()
-        .setLatLng([51.5, -0.09])
-        .setContent("I am a standalone popup.")
-        .openOn(mymap);*/
-
-
-
-
-    var MacizosUrbanosGeneral = L.tileLayer.wms('http://catastro.tolhuin.gob.ar/geoserver/ows?', {
-        layers: "catastro:Macizos Urbanos general",
+        layers: "turismo:gis_tolh_int_turistico",//nombre de la capa (ver get capabilities)
         format: 'image/png',
         INFO_FORMAT:'application',
         transparent: true,
-        version: '1.3',
-        height:'286',
-        width: '286'
-    });
+        version: '1.3'
+    }).addTo(mymap)
+    }*/
+
+
+
+/*
+    var basemaps = {
+
+        "zonificacion de usos del suelo": L.tileLayer.wms('http://catastro.tolhuin.gob.ar/geoserver/ows?', {
+            layers:
+                "tierras:gis_tolh_ejido,catastro:gis_tolh_parcelas_rur,catastro:gis_tolhuin_ncalles," +
+                "catastro:gis_tolh_parcelas_rur,catastro:gis_tolh_barrios" +
+                ",ambiental:gis_tolh_lagos" +
+                ",ambiental:gis_tolh_areas_protegidas,tierras:gis_tolh_zonificacion",//nombre de la capa (ver get capabilities)
+            format: 'image/png',
+            transparent: true,
+            version: '1.3',
+            height:'286',
+            width: '286'
+            //wms version (ver get capabilities)
+        }),
+
+        "plano general":L.tileLayer.wms('http://catastro.tolhuin.gob.ar/geoserver/ows?', {
+            layers: "catastro:Macizos Urbanos general,tierras:gis_tolh_ejido,catastro:gis_tolh_parcelas_rur,catastro:gis_tolhuin_ncalles," +
+                "catastro:gis_tolh_parcelas_rur,catastro:gis_tolh_barrios" +
+                ",ambiental:gis_tolh_lagos" +
+                ",ambiental:gis_tolh_areas_protegidas,tierras:Macizos Provisorios general lineas,"+
+                "tierras:Macizos Provisorios general,catastro:Macizos Urbanos general lineas,turismo:gis_tolh_int_turistico",//nombre de la capa (ver get capabilities)
+            format: 'image/png',
+            INFO_FORMAT:'application',
+            transparent: true,
+            version: '1.3',
+            height:'286',
+            width: '286'
+            })
+        ,
+
+        'Countries, then boundaries': L.tileLayer.wms('https://demo.boundlessgeo.com/geoserver/ows?', {
+            layers: 'ne:ne_10m_admin_0_countries,ne:ne_10m_admin_0_boundary_lines_land'
+        }),
+
+        'Boundaries, then countries': L.tileLayer.wms('https://demo.boundlessgeo.com/geoserver/ows?', {
+            layers: 'ne:ne_10m_admin_0_boundary_lines_land,ne:ne_10m_admin_0_countries'
+        })
+    };*/
+
+    var MacizosUrbanosGeneral = L.tileLayer.wms('http://catastro.tolhuin.gob.ar/geoserver/ows?', {
+            layers: "catastro:Macizos Urbanos general",
+            format: 'image/png',
+            INFO_FORMAT:'application',
+            transparent: true,
+            version: '1.3',
+            height:'286',
+            width: '286'
+        });
     var baseMaps = {
     };
     var ejido = L.tileLayer.wms('http://catastro.tolhuin.gob.ar/geoserver/ows?', {
@@ -261,27 +243,27 @@
         })
     ;
     var Zonficacion = L.tileLayer.wms('http://catastro.tolhuin.gob.ar/geoserver/ows?', {
-        layers: "tierras:gis_tolh_zonificacion",
-        format: 'image/png',
-        INFO_FORMAT:'application',
-        transparent: true,
-        version: '1.3',
-        height:'286',
-        width: '286'
-    });
+            layers: "tierras:gis_tolh_zonificacion",
+            format: 'image/png',
+            INFO_FORMAT:'application',
+            transparent: true,
+            version: '1.3',
+            height:'286',
+            width: '286'
+        });
 
 
 
     var overlays={
-        "Macizos Urbanos general":   MacizosUrbanosGeneral,
-        "Zonficacion":  Zonficacion,
+     "Macizos Urbanos general":   MacizosUrbanosGeneral,
+      "Zonficacion":  Zonficacion,
         "Parcelas Rural": ParcelasRural,
         "Calles": Calles,
         "Barrios": Barrios,
         "Lagos": lagos,
         "Areas Protegidas": AreasProtegidas,
         "Macizos Provisorios":  MacizosProvisorios,
-        "Macizos Urbanos general Lineas" : MacizosUrbanos,
+      "Macizos Urbanos general Lineas" : MacizosUrbanos,
         "turistico": turisitico,
         "Ejido":ejido
     };
@@ -291,16 +273,41 @@
 
 
 
+    /* var marker = L.marker([-54.5108, -67.19550]).addTo(mymap);*/
+    /*var marker2 = L.marker([-54.50, -67.190]).addTo(mymap);*/
+    /*var circle = L.circle([-54.510829, -67.19550], {
+        color: 'red',
+        fillColor: '#f03',
+        fillOpacity: 0.5,
+        radius: 500
+    }).addTo(mymap);*/
+
+    /*var polygon = L.polygon([
+        [51.509, -0.08],
+        [51.503, -0.06],
+        [51.51, -0.047]
+    ]).addTo(mymap);*/
+
+    /*circle.bindPopup("I am a circle.");
+    polygon.bindPopup("I am a polygon.");
+
+    var popup = L.popup()
+        .setLatLng([51.5, -0.09])
+        .setContent("I am a standalone popup.")
+        .openOn(mymap);*/
+
+
+
     var popup = L.popup();
 
     function onMapClick(e) {
         popup
             .setLatLng(e.latlng)
             .setContent("You clicked the map at " + e.latlng.toString())
-            .openOn(mymap);
+            .openOn(map);
     }
 
-    mymap.on('click', onMapClick);
+    map.on('click', onMapClick);
 
 </script>
 

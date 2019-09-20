@@ -189,6 +189,57 @@ class EmprendimientoController {
                 contentType: emprendimiento.featuredImageContentType
     }
 
+    def exportService
+
+
+    def export() {
+
+        if (!params.max) params.max = 10
+
+        if (params?.format && params.format != "html") {
+            response.contentType = grailsApplication.config.grails.mime.types[params.format]
+            response.setHeader("Content-disposition", "attachment; filename=books.${params.extension}")
+
+
+            /* String
+                Double
+                Double longitud
+                String direccion
+                Boolean validado
+                Boolean habilitado
+                String foto
+                Rubro rubro
+                Ambito ambito
+                int telefono
+                //Detalle detalle
+                String descripcion
+                Usuario investigador
+                byte[] featuredImageBytes
+                String featuredImageContentType
+                String */
+            List fields = ['nombre', "usuario", "direccion"]
+            Map labels = ["nombre": "Nombre", "usuario": "Usuario", "direccion": "Direccion"]
+
+            /* Formatter closure in previous releases
+                def upperCase = { value ->
+                    return value.toUpperCase()
+                }
+                */
+
+            // Formatter closure
+            def upperCase = { domain, value ->
+                return value.toUpperCase()
+            }
+
+            Map formatters = [nombre: upperCase]
+
+            exportService.export(params.format, response.outputStream, Emprendimiento.list(params), fields, labels, formatters)
+        }
+
+        [bookInstanceList: Emprendimiento.list(params)]
+
+    }
+
     protected void notFound() {
         request.withFormat {
             form multipartForm {

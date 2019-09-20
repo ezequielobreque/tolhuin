@@ -5,6 +5,9 @@ import groovy.json.*
 class MapController {
 
     def index() { }
+    def map3(){
+
+    }
     def mapi(){
         String direcion='Gobernador Campos N°1416'
        String dire= direcion.replaceAll("[^A-Za-z0-9]", "+")

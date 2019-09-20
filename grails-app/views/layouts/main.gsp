@@ -129,9 +129,13 @@
 			<div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
 				<div class="bg-white py-2 collapse-inner rounded">
 					<h6 class="collapse-header">Custom Utilities:</h6>
+					<g:if test="${session["logeado"] == false}">
 					<a class="collapse-item" href="/usuario/create">Registrarse</a>
 					<a class="collapse-item" href="/login/login">Iniciar Sesion</a>
 					<a class="collapse-item" href="/startbootstrap-sb-admin-2-gh-pages/utilities-animation.html">Recuperar contraseña</a>
+					</g:if><g:else>
+					<a class="collapse-item" href="/login/logout">Cerrar Sesion</a>
+				</g:else>
 
 				</div>
 			</div>
@@ -217,6 +221,9 @@
 							<button class="btn btn-primary" type="submit">
 								<i class="fas fa-search fa-sm"></i>
 							</button>
+                            <button class="btn btn-primary" type="submit">
+                                <i class="fas fa-map-marked-alt"></i>
+                            </button>
 						</div>
 
 					</div>

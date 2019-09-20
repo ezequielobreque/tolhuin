@@ -73,7 +73,7 @@ class ExcelImporterController {
                         def local=v.local;
                         print(v.local)
                         if (local==null){
-                            local="negocio de " + v.nombre
+                            local="negocio de " + v.nombre+".Dir: "+v.direccion
                         }
                         def ambito=Ambito.findByNombre(v.ambito)
                         def sector= Sector.findByNombre(v.sector)
