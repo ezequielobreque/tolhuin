@@ -1,7 +1,9 @@
 package tolhuin
 
 
-import grails.validation.ValidationException
+
+import javax.xml.bind.ValidationException
+
 import static org.springframework.http.HttpStatus.*
 
 class EmprendimientoController {
@@ -13,50 +15,61 @@ class EmprendimientoController {
     def visitante() {
         respond emprendimientoService.list()
     }
-    def busqueda(String buscar,String rubro,String ambito,String sector) {
+    def busqueda(String buscar,String rubro,String ambito,String sector ,String actions) {
 
-        def amb=Ambito.findByNombreLike('%'+ambito+'%')
-        def rub=Rubro.findByNombreLike('%'+rubro+'%')
 
-        def sec=Sector.findByNombreLike('%'+sector+'%')
-        print (sec)
-        def List=Emprendimiento.findAllByNombreLike('%' + buscar + '%')
-        /*if (amb!=null && rub!=null) {
+            if(actions == 'mapa'){
+                redirect(controller:"map",action: "mapa",params: [buscar:buscar,rubro:rubro,ambito:ambito,sector:sector])
+            }else  if (actions =='filtro' ) {
 
-            List = Emprendimiento.findAllByNombreLikeAndAmbitoAndRubro('%' + buscar + '%', amb, rub)
-        }else
-            if(amb!=null&& rub==null){
+            def amb=Ambito.findByNombreLike('%'+ambito+'%')
+            def rub=Rubro.findByNombreLike('%'+rubro+'%')
 
-                List = Emprendimiento.findAllByNombreLikeAndAmbito('%' + buscar + '%', amb)
+            def sec=Sector.findByNombreLike('%'+sector+'%')
+            print (sec)
+            def List=Emprendimiento.findAllByNombreLike('%' + buscar + '%')
+            /*if (amb!=null && rub!=null) {
+
+                List = Emprendimiento.findAllByNombreLikeAndAmbitoAndRubro('%' + buscar + '%', amb, rub)
+            }else
+                if(amb!=null&& rub==null){
+
+                    List = Emprendimiento.findAllByNombreLikeAndAmbito('%' + buscar + '%', amb)
+                }
+            else if(rub!=null && amb==null){
+
+                    List = Emprendimiento.findAllByNombreLikeAndRubro('%' + buscar + '%', rub)
+
+                }else if(rub==null && amb==null)
+                    {
+
+                        List = Emprendimiento.findAllByNombreLike('%' + buscar + '%')
+
+                    }*/
+            if (amb!=null){
+
+                List=List.findAll { it.ambito == amb }
+
             }
-        else if(rub!=null && amb==null){
+            if (rub!=null){
+                List=List.findAll { it.rubro == rub }
 
-                List = Emprendimiento.findAllByNombreLikeAndRubro('%' + buscar + '%', rub)
-
-            }else if(rub==null && amb==null)
-                {
-
-                    List = Emprendimiento.findAllByNombreLike('%' + buscar + '%')
-
-                }*/
-        if (amb!=null){
-            List=List.findAll { it.ambito == amb }
-
-        }
-        if (rub!=null){
-            List=List.findAll { it.rubro == rub }
-
-        }
-        if (sec!=null) {
+            }
+            if (sec!=null) {
 
 
-            print(List.rubro.sector.nombre)
-          List=List.findAll { it.rubro.sector.nombre == sec.nombre }
+                print(List.rubro.sector.nombre)
+                List=List.findAll { it.rubro.sector.nombre == sec.nombre }
+
+            }
+
+
+            [list:List]
+        }  else {
 
         }
 
 
-        [list:List]
 
 
 

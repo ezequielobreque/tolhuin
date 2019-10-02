@@ -26,7 +26,7 @@ class MapController {
 
         }
     }
-    def mapa(String id) {
+    def mapa(String id,String buscar,String rubro,String ambito,String sector ) {
         print(id)
         def emp
         if (id!=null) {
@@ -40,19 +40,89 @@ class MapController {
             json = JsonOutput.toJson([nombre: emp.nombre, rubro: emp.rubro.nombre, sector: emp.rubro.sector.nombre, longitud: emp.longitud, latitud: emp.latitud, direccion: emp.direccion, telefono: emp.telefono])
         }
 
-        def List=Emprendimiento.getAll()
-        def listJson=JsonOutput.toJson(null)
-        def aray=[]
-        if(List!=null) {
+        def List = Emprendimiento.getAll()
+        def listJson = JsonOutput.toJson(null)
+        def aray = []
+
+            def amb=null
+            if(ambito!=null){
+                if(!ambito.isEmpty()){
+
+                    amb = Ambito.findByNombreLike('%' + ambito + '%')
+                }
+            }
+            print(amb)
+
+            def rub=null
+        if(rubro!=null){
+            if(!rubro.isEmpty()) {
+                rub = Rubro.findByNombreLike('%' + rubro + '%')
+
+            }
+            }
+            def sec=null
+
+                if(sector!=null) {
+                    if (!sector.isEmpty()) {
+                        sec = Sector.findByNombreLike('%' + sector + '%')
+                    }
+                }
+
+        if(buscar!=null){
+            if(!buscar.isEmpty()) {
+                print (buscar.isEmpty())
+                List = Emprendimiento.findAllByNombreLike('%' + buscar + '%')
+
+            }
+        }
+
+
+            /*if (amb!=null && rub!=null) {
+
+                List = Emprendimiento.findAllByNombreLikeAndAmbitoAndRubro('%' + buscar + '%', amb, rub)
+            }else
+                if(amb!=null&& rub==null){
+
+                    List = Emprendimiento.findAllByNombreLikeAndAmbito('%' + buscar + '%', amb)
+                }
+            else if(rub!=null && amb==null){
+
+                    List = Emprendimiento.findAllByNombreLikeAndRubro('%' + buscar + '%', rub)
+
+                }else if(rub==null && amb==null)
+                    {
+
+                        List = Emprendimiento.findAllByNombreLike('%' + buscar + '%')
+
+                    }*/
+
+            if (amb!=null){
+                List=List.findAll{it.ambito.nombre.toString()==ambito.toString()}
+
+
+
+            }
+            if (rub!=null){
+                print(rubro.toString())
+                List=List.findAll { it.rubro.nombre.toString()==rubro.toString()}
+
+            }
+            if (sec!=null) {
+
+
+                print(List.rubro.sector.nombre)
+                List=List.findAll { it.rubro.sector.nombre.toString()==sector.toString() }
+
+            }
+
+        if (List != null) {
             List.each {
-                aray.add([id:it.id,nombre: it.nombre, rubro: it.rubro.nombre, sector: it.rubro.sector.nombre, longitud: it.longitud, latitud: it.latitud, direccion: it.direccion,imagen:it.featuredImageBytes, telefono: it.telefono])
+                aray.add([id: it.id, nombre: it.nombre, ambito:it.ambito.nombre,rubro: it.rubro.nombre, sector: it.rubro.sector.nombre, longitud: it.longitud, latitud: it.latitud, direccion: it.direccion, imagen: it.featuredImageBytes, telefono: it.telefono])
             }
 
 
-            listJson=JsonOutput.toJson(aray)
-            print(listJson)
+            listJson = JsonOutput.toJson(aray)
         }
-
 
         [emp: json,list:listJson]
 

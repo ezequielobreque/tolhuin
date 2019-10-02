@@ -218,10 +218,10 @@
 					<div class="input-group">
 						<input type="text" class="form-control bg-light border-0 small" name="buscar" id="buscar" placeholder="Bsucar Emprendimientos.." aria-label="Search" aria-describedby="basic-addon2">
 						<div class="input-group-append">
-							<button class="btn btn-primary" type="submit">
+							<button class="btn btn-primary" type="submit" name="actions" value="filtro">
 								<i class="fas fa-search fa-sm"></i>
 							</button>
-                            <button class="btn btn-primary" type="submit">
+                            <button class="btn btn-primary" type="submit" name="actions" value="mapa">
                                 <i class="fas fa-map-marked-alt"></i>
                             </button>
 						</div>

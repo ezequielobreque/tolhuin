@@ -1,5 +1,8 @@
 package tolhuin
-class Emprendimiento  {
+
+import grails.validation.Validateable
+
+class Emprendimiento {
     String nombre
     Double latitud
     Double longitud

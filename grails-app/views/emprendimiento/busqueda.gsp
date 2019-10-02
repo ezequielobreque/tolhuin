@@ -24,6 +24,15 @@
 
     <f:table collection="${this.list}" except="featuredImageBytes,featuredImageContentType" />
 
+    <form class= method="POST" action="/excelExport/filtro">
+                <button class="btn btn-primary" name="filt" id="filt" value="${this.list.id}"
+                type="submit">
+
+                    <i class="far fa-file-excel"></i>
+                </button>
+
+
+    </form>
 
 
 </div>

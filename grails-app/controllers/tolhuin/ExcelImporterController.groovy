@@ -1,6 +1,6 @@
 package tolhuin
 import org.apache.poi.xssf.usermodel.XSSFWorkbook
-import static org.apache.poi.ss.usermodel.Cell.*
+import static com.lowagie.text.Cell.*
 import java.io.File
 import groovy.json.*
 class ExcelImporterController {
