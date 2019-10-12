@@ -48,9 +48,11 @@ class ExcelExportController{
     // Get the bytes
     //    def bytes = gifRenderingService.render(template:'/images/coupon', model: [serial: 12345])
     // Render to a file
+        renderPdf(template: '/emprendimiento/show/'+id+'', model: [report: reportObject], filename: reportObject.name)
+        /*
         new File("nuevo.pdf").withOutputStream { outputStream ->
             pdfRenderingService.render([template: '/emprendimiento/show/'+id+'', model: [serial: 12345]], outputStream)
-        }
+        }*/
 
     }
     }
