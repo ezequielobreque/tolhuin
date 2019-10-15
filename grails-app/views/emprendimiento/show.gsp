@@ -4,8 +4,34 @@
         <meta name="layout" content="main" />
         <g:set var="entityName" value="${message(code: 'emprendimiento.label', default: 'Emprendimiento')}" />
         <title><g:message code="default.show.label" args="[entityName]" /></title>
+        <asset:javascript src="jspdf.min.js"/>
+        <script>
+        function generatePDF() {
+            var doc = new jsPDF();
+            doc.setFontSize(32);
+            doc.text(70, 20, '${this.emprendimiento.nombre}');
+            doc.setFontSize(16);
+            doc.text(20, 35, 'Nombre:');
+            doc.text(50, 35, '${this.emprendimiento.nombre}');
+
+
+            doc.text(20, 45, 'direccion:');
+            doc.text(50, 45, '${this.emprendimiento.direccion}');
+
+
+
+            // Add new page
+            doc.addPage();
+            doc.text(20, 20, 'Visit CodexWorld.com');
+
+            // Save the PDF
+            doc.save('document.pdf')
+        }
+
+        </script>
     </head>
     <body>
+
         <a href="#show-emprendimiento" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
         <div class="nav" role="navigation">
             <ul>
@@ -14,6 +40,7 @@
                 <li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
             </ul>
         </div>
+
         <div id="show-emprendimiento" class="content scaffold-show" role="main">
             <h1><g:message code="default.show.label" args="[entityName]" /></h1>
             <g:if test="${flash.message}">
@@ -35,6 +62,12 @@
                 </fieldset>
 
             </g:form>
-            </div>
+
+        </div>
+
+
+
+
+    <button onclick="generatePDF()">Generate PDF</button>
     </body>
 </html>
