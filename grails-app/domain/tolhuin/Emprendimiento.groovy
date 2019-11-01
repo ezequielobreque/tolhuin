@@ -13,15 +13,17 @@ class Emprendimiento {
     Rubro rubro
     Ambito ambito
     int telefono
-    //Detalle detalle
     String descripcion
     Usuario investigador
     byte[] featuredImageBytes
     String featuredImageContentType
+    Usuario user
     String usuario
     static constraints = {
-        nombre display:true,nullable: true,unique:['direccion','usuario']
-        usuario display:true,nullable: true,unique: ['direccion','nombre']
+
+        nombre display:true,nullable: true ,unique:['direccion','usuario']
+        usuario display:true,nullable: true ,unique: ['direccion','nombre']
+        user display:false,nullable: true
         latitud display: false, nullable:true
         longitud display: false, nullable:true
         descripcion display:true, nullable: true

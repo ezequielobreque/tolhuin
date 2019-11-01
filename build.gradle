@@ -27,6 +27,7 @@ repositories {
 }
 
 dependencies {
+    compile 'org.grails.plugins:spring-security-core:3.2.3'
     compile 'org.grails.plugins:wkhtmltopdf:1.0.0.RC9'
     compile 'org.grails.plugins:rendering:2.0.3'
     compile 'org.grails.plugins:excel-export:2.1'
@@ -43,7 +44,6 @@ dependencies {
     compile "org.grails:grails-plugin-i18n"
     compile "org.grails:grails-plugin-services"
     compile "org.grails:grails-plugin-url-mappings"
-    compile "org.grails:grails-plugin-interceptors"
     compile "org.grails.plugins:cache"
     compile "org.grails.plugins:async"
     compile "org.grails.plugins:scaffolding"

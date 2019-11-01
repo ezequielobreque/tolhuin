@@ -129,13 +129,15 @@
 			<div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
 				<div class="bg-white py-2 collapse-inner rounded">
 					<h6 class="collapse-header">Custom Utilities:</h6>
-					<g:if test="${session["logeado"] == false}">
+					<sec:ifNotLoggedIn>
 					<a class="collapse-item" href="/usuario/create">Registrarse</a>
-					<a class="collapse-item" href="/login/login">Iniciar Sesion</a>
+						<g:link class="collapse-item" controller="login">Iniciar Sesion </g:link>
 					<a class="collapse-item" href="/startbootstrap-sb-admin-2-gh-pages/utilities-animation.html">Recuperar contraseña</a>
-					</g:if><g:else>
-					<a class="collapse-item" href="/login/logout">Cerrar Sesion</a>
-				</g:else>
+					</sec:ifNotLoggedIn>
+						<sec:ifLoggedIn>
+%{--					<a class="collapse-item" href="/login/logout"></a>--}%
+							<g:link class="collapse-item" controller="logout">Cerrar Sesion </g:link>
+						</sec:ifLoggedIn>
 
 				</div>
 			</div>

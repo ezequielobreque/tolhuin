@@ -52,9 +52,12 @@ class BootStrap {
 		list.each { println it }
 */
 
+
+
 		new Usuario(nombre: "abc", apellido: "def",nick:"admin", tipo: "administrador", contrasena:"admin" ).save()
 
 		new Usuario(nombre: "nuevo", apellido: "alguno",nick:"normal", tipo: "emprendedor", contrasena:"normal" ).save()
+
     	def primario=new Sector(nombre:"PRIMARIO")
     	def secundario=new Sector(nombre:"SECUNDARIO")
     	def terciario=new Sector(nombre:"TERCIARIO")
@@ -67,7 +70,6 @@ class BootStrap {
     	privado.save()
     	def forestal=new Rubro(nombre:"FORESTAL")
     	def panaderia=new Rubro(nombre: "panadería")
-    	def horticola=new Rubro(nombre: "horticola")
     	def ganadero=new Rubro(nombre: "ganadero")
 
     	def polirrubro=new Rubro(nombre:"polirrubro")
@@ -76,7 +78,6 @@ class BootStrap {
     	def gastronomico=new Rubro(nombre:"gastronomico")
     	forestal.save()
     	panaderia.save()
-    	horticola.save()
     	ganadero.save()
     	polirrubro.save()
     	artesanias.save()
@@ -90,7 +91,7 @@ class BootStrap {
 		terciario.addToRubros(tel2)
 
     	primario.addToRubros(forestal)
-    	primario.addToRubros(horticola)
+
     	primario.addToRubros(ganadero)
     	primario.save()
     	secundario.addToRubros(artesanias)
@@ -102,8 +103,9 @@ class BootStrap {
     	terciario.save()
 
 
-		def HORTÍCOLA=new Rubro(nombre: "HORTÍCOLA")
-		HORTÍCOLA.save()
+		def HORTICOLA=new Rubro(nombre: "HORTÍCOLA")
+		HORTICOLA.save()
+		primario.addToRubros(HORTICOLA)
 		/*
 		FORESTAL
 		GANADERO
@@ -166,12 +168,41 @@ class BootStrap {
 		ESTUDIO JURIDICO
 		CARPINTERIA
 		*/
+		def adminRole=Role.findOrSaveWhere(authority:'ROLE_ADMIN')
+		def investigadorRole=Role.findOrSaveWhere(authority:'ROLE_INVESTIGADOR')
+		def ministerioRole=Role.findOrSaveWhere(authority:'ROLE_MINISTERIO')
+		def emprendimientoRole=Role.findOrSaveWhere(authority:'ROLE_EMPRENDEDOR')
+		def admin= User.findOrSaveWhere(username:'admin',password:'admin')
+		admin.setUsuario(Usuario.findByNick('admin'))
+
+		def investigador = User.findOrSaveWhere(username: 'investigador' ,password: '12345')
+		def ministerio = User.findOrSaveWhere(username: 'ministerio' ,password: '12345')
+		def emprendedor = User.findOrSaveWhere(username: 'emprededor' ,password: '12345')
+
+		if(!admin.authorities.contains(adminRole)){
+
+			UserRole.create(admin,adminRole,true)
+		}
+		if(!investigador.authorities.contains(adminRole)){
+
+			UserRole.create(investigador,investigadorRole,true)
+		}
+
+		if(!ministerio.authorities.contains(adminRole)){
+
+			UserRole.create(ministerio,ministerioRole,true)
+		}
+		if(!emprendedor.authorities.contains(adminRole)){
+
+			UserRole.create(emprendedor,emprendimientoRole,true)
+		}
+
 
 
 		new Emprendimiento(nombre:"aserradero1", latitud: -54.5210, longitud: -67.2182, direccion:"abc 123", validado:true, habilitado:true,rubro:forestal,descripcion: "el mejor lugar para cortar leña de la cuidad", ambito:privado).save()
-    	new Emprendimiento(nombre:"huerta a", latitud: -54.5120, longitud: -67.1950, direccion:"abc def", validado:true, habilitado:true,rubro:horticola, ambito:privado).save()
+    	new Emprendimiento(nombre:"huerta a", latitud: -54.5120, longitud: -67.1950, direccion:"abc def", validado:true, habilitado:true,rubro:HORTICOLA, ambito:privado).save()
     	new Emprendimiento(nombre:"vacas", latitud: -54.5050, longitud: -67.1990, direccion:"zxc ef", validado:true, habilitado:true,rubro:ganadero, ambito:privado).save()
-    	new Emprendimiento(nombre:"huerta b", latitud: -54.4990, longitud: -67.2082, direccion:"abc cda", validado:true, habilitado:true,rubro:horticola, ambito:privado).save()
+    	new Emprendimiento(nombre:"huerta b", latitud: -54.4990, longitud: -67.2082, direccion:"abc cda", validado:true, habilitado:true,rubro:HORTICOLA, ambito:privado).save()
     	new Emprendimiento(nombre:"artemania", latitud: -54.4890, longitud: -67.1982, direccion:"abc 123", validado:true, habilitado:true,rubro:artesanias, ambito:privado).save()
     	new Emprendimiento(nombre:"madera", latitud: -54.4810, longitud: -67.1982, direccion:"abc 123", validado:true, habilitado:true,rubro:carpinteria, ambito:privado).save()
     	new Emprendimiento(nombre:"centro de tolhuin", latitud: -54.5040, longitud: -67.2282, direccion:"abc 123", validado:true, habilitado:true,rubro:panaderia, ambito:privado).save()

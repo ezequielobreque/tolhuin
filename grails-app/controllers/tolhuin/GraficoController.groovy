@@ -1,10 +1,9 @@
 package tolhuin
 
-
+import grails.plugin.springsecurity.annotation.Secured
 import groovy.json.*
-
+@Secured(['ROLE_ANONYMOUS','ROLE_ADMIN','ROLE_USER'])
 class GraficoController {
-
     def index() { 
     	def data=new ArrayList()
         String consulta=("from Emprendimiento as e where e.rubro.sector.nombre='PRIMARIO'")

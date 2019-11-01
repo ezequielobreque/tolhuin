@@ -1,7 +1,9 @@
 package tolhuin
 
+import grails.plugin.springsecurity.annotation.Secured
 import grails.validation.ValidationException
 import static org.springframework.http.HttpStatus.*
+@Secured('ROLE_ANONYMOUS')
 class UsuarioController {
 
     UsuarioService usuarioService
@@ -20,7 +22,10 @@ class UsuarioController {
 
     def create() {
 
-        respond new Usuario(params)
+       respond new Usuario(params)
+
+
+
     }
 
     def save(Usuario usuario) {
@@ -30,15 +35,32 @@ class UsuarioController {
         }
 
         try {
+            def us = User.findOrSaveWhere(username: params.nick ,password: params.password)
+            usuario.user=us
+            print('llege')
+            def role= Role.findByAuthority('ROLE_ADMIN');
+            switch (usuario.tipo){
+                case 'administrador' :role=Role.findByAuthority('ROLE_ADMIN');
+                case 'municipalidad' : role =Role.findByAuthority('ROLE_MINISTERIO');
+                case 'emprendedor' : role =Role.findByAuthority('ROLE_EMPRENDEDOR');
+                case 'investigador' : role =Role.findByAuthority('ROLE_INVESTIGADOR');
+                default : role = Role.findByAuthority('ROLE_EMPRENDEDOR');
+            }
             usuarioService.save(usuario)
+            print(usuario)
+            us.setUsuario(usuario)
+            UserRole.create(us,role,true)
+
+
+
+
         } catch (ValidationException e) {
             respond usuario.errors, view:'create'
             return
         }
 
         if (usuario!=null){
-            session["logeado"]=true
-            session["tipo"]=usuario.tipo
+
             if(usuario.tipo=='emprendedor'){
 
                 flash.message = "Su usuario ha sido creado ahora ingrese los datos de su emprendimiento"

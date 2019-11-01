@@ -1,8 +1,11 @@
 package tolhuin
+
+import grails.plugin.springsecurity.annotation.Secured
 import org.apache.poi.xssf.usermodel.XSSFWorkbook
 import static com.lowagie.text.Cell.*
 import java.io.File
 import groovy.json.*
+@Secured(['ROLE_ANONYMOUS','ROLE_ADMIN'])
 class ExcelImporterController {
 
     EmprendimientoService emprendimientoService

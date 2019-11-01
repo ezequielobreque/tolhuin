@@ -15,8 +15,41 @@
             doc.text(50, 35, '${this.emprendimiento.nombre}');
 
 
-            doc.text(20, 45, 'direccion:');
+            doc.text(20, 45, 'Direccion:');
             doc.text(50, 45, '${this.emprendimiento.direccion}');
+
+            doc.text(20, 55, 'Dueño:');
+            doc.text(50, 55, '${this.emprendimiento.usuario}');
+
+            doc.text(20, 65, 'Telefono:');
+            doc.text(50, 65, '${this.emprendimiento.telefono}');
+
+            doc.text(20, 75, 'Habilitado:');
+            if('${this.emprendimiento.habilitado}' == 'true'){
+            doc.text(50, 75, 'Si,esta habilitado');
+            }else{
+                doc.text(50, 75, 'No,no esta habilitado');
+            }
+            doc.text(20, 85, 'Validado:');
+            if('${this.emprendimiento.validado}' == 'true'){
+            doc.text(50, 85, 'Si,esta validado');
+           }else{
+            doc.text(50, 85, 'No, no esta validado');
+           }
+
+            doc.text(20, 95, 'Rubro:');
+            doc.text(50, 95, '${this.emprendimiento.rubro.nombre}');
+
+            doc.text(20, 105, 'Sector:');
+            doc.text(50, 105, '${this.emprendimiento.rubro.sector.nombre}');
+
+            doc.text(20, 115, 'Ambito:');
+            doc.text(50, 115, '${this.emprendimiento.ambito.nombre}');
+
+            doc.text(20, 125, 'Descripcion:');
+            doc.text(52, 125, '${this.emprendimiento.descripcion}');
+
+
 
 
 
@@ -32,17 +65,10 @@
     </head>
     <body>
 
-        <a href="#show-emprendimiento" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-        <div class="nav" role="navigation">
-            <ul>
-                <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-                <li><g:link class="list" action="index"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-                <li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
-            </ul>
-        </div>
 
-        <div id="show-emprendimiento" class="content scaffold-show" role="main">
-            <h1><g:message code="default.show.label" args="[entityName]" /></h1>
+
+        <div id="show-emprendimiento" class="contentShow" role="main">
+            <h1>${this.emprendimiento.nombre}</h1>
             <g:if test="${flash.message}">
             <div class="message" role="status">${flash.message}</div>
             </g:if>
@@ -53,21 +79,31 @@
             <f:display bean="emprendimiento" except="featuredImageBytes,featuredImageContentType" />
 
         </div>
-            <g:form resource="${this.emprendimiento}" method="DELETE">
-                <fieldset class="buttons">
-                    <g:link class="edit" action="edit" resource="${this.emprendimiento}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
-                    <input class="delete" type="submit" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
-                    <g:link class="fas fa-image" action="editFeaturedImage" resource="${this.emprendimiento}">agregar imagen del emprendimiento</g:link>
+        <fieldset class="botonesDelShow">
 
-                </fieldset>
 
-            </g:form>
+            <g:link type="button" class="btn btn-google" action="edit" resource="${this.emprendimiento}" style="background-color:#f39c12 "><i class="fas fa-edit"> <g:message code="default.button.edit.label" default="Edit" /></i></g:link>
 
+
+
+
+        <button class="btn btn-borrado"> <g:form resource="${this.emprendimiento}" method="DELETE">
+
+                        <i class="fas fa-trash"><input class="delete" type="submit" style=" color: white;border: aliceblue;background-color: #e74c3c" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" /></i>
+
+            </g:form> </button>
+
+                <button class="btn btn-facebook"><g:link action="editFeaturedImage" resource="${this.emprendimiento}" style="color: white"><i class="fas fa-image">  agregar imagen</i></g:link></button>
+
+                    <button onclick="generatePDF()" class="btn btn-danger" ><i class="fas fa-file-pdf"> Crear PDF</i></button>
+
+
+
+        </fieldset>
         </div>
 
 
 
 
-    <button onclick="generatePDF()">Generate PDF</button>
     </body>
 </html>

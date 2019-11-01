@@ -1,7 +1,8 @@
 package tolhuin
 
+import grails.plugin.springsecurity.annotation.Secured
 import groovy.json.*
-
+@Secured(['ROLE_ANONYMOUS','ROLE_ADMIN','ROLE_MINISTERIO','ROLE_INVESTIGADOR','ROLE_ADMINISTRADOR','ROLE_EMPRENDEDOR'])
 class MapController {
 
     def index() { }

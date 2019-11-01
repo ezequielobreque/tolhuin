@@ -1,8 +1,9 @@
 package tolhuin
 
+import grails.plugin.springsecurity.annotation.Secured
 import grails.validation.Validateable
 import org.springframework.web.multipart.MultipartFile
-
+@Secured(['ROLE_ANONYMOUS'])
 class FeaturedImageCommand implements Validateable {
     MultipartFile featuredImageFile
     Long id

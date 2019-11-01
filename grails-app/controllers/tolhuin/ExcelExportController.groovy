@@ -1,10 +1,11 @@
 package tolhuin
 
+import grails.plugin.springsecurity.annotation.Secured
 import grails.validation.Validateable
 import pl.touk.excel.export.WebXlsxExporter
 
 import java.lang.reflect.Array
-
+@Secured(['ROLE_ANONYMOUS','ROLE_ADMIN','ROLE_MINISTERIO','ROLE_INVESTIGADOR','ROLE_ADMINISTRADOR','ROLE_EMPRENDEDOR'])
 class ExcelExportController{
 
     def index() {

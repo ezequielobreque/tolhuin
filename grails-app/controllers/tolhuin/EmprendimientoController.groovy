@@ -1,11 +1,14 @@
 package tolhuin
 
-
+import grails.plugin.springsecurity.annotation.Secured
+import org.springframework.security.authentication.AnonymousAuthenticationToken
+import org.springframework.security.core.Authentication
+import org.springframework.security.core.context.SecurityContextHolder
 
 import javax.xml.bind.ValidationException
 
 import static org.springframework.http.HttpStatus.*
-
+@Secured(['ROLE_ANONYMOUS','ROLE_ADMIN','ROLE_MINISTERIO','ROLE_INVESTIGADOR','ROLE_ADMINISTRADOR','ROLE_EMPRENDEDOR'])
 class EmprendimientoController {
 
     EmprendimientoService emprendimientoService
@@ -82,12 +85,12 @@ class EmprendimientoController {
     def show(Long id) {
         respond emprendimientoService.get(id)
     }
-
-    def create(String tipo) {
+    @Secured(['ROLE_ADMIN','ROLE_MINISTERIO','ROLE_INVESTIGADOR','ROLE_ADMINISTRADOR','ROLE_EMPRENDEDOR'])
+    def create() {
 
         respond new Emprendimiento(params)
     }
-
+    @Secured(['ROLE_ADMIN','ROLE_MINISTERIO','ROLE_INVESTIGADOR','ROLE_ADMINISTRADOR','ROLE_EMPRENDEDOR'])
     def save(Emprendimiento emprendimiento) {
         if (emprendimiento == null) {
             notFound()
@@ -95,7 +98,23 @@ class EmprendimientoController {
         }
 
         try {
-            emprendimientoService.save(emprendimiento)
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            if (!(authentication instanceof AnonymousAuthenticationToken)) {
+
+
+
+                emprendimiento.setUser(authenticatedUser.getUsuario())
+                Usuario us= Usuario.findById((authenticatedUser.getUsuario().id))
+                if(!(emprendimiento.user==us)){
+                us.addToEmprendimientos(emprendimiento)}
+                emprendimientoService.save(emprendimiento)
+
+
+
+
+            }
+
+
         } catch (ValidationException e) {
             respond emprendimiento.errors, view:'create'
             return
@@ -109,12 +128,23 @@ class EmprendimientoController {
             '*' { respond emprendimiento, [status: CREATED] }
         }
     }
-
+    @Secured(['ROLE_ADMIN','ROLE_MINISTERIO','ROLE_INVESTIGADOR','ROLE_ADMINISTRADOR','ROLE_EMPRENDEDOR'])
     def edit(Long id) {
-        respond emprendimientoService.get(id)
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (!(authentication instanceof AnonymousAuthenticationToken)) {
+
+
+            Usuario us=getAuthenticatedUser().getUsuario()
+            if (us.emprendimientos.contains(emprendimientoService.get(id))) {
+                respond emprendimientoService.get(id)
+            }else {
+                flash.message = "error"
+            }
+        }
+
     }
 
-
+    @Secured(['ROLE_ADMIN','ROLE_USER'])
     def update(Emprendimiento emprendimiento) {
         if (emprendimiento == null) {
             notFound()
@@ -153,7 +183,7 @@ class EmprendimientoController {
             '*'{ render status: NO_CONTENT }
         }
     }
-
+    @Secured(['ROLE_ADMIN','ROLE_USER'])
     def editFeaturedImage(Long id) {
         Emprendimiento emprendi = emprendimientoService.get(id)
         if (!emprendi) {
@@ -161,7 +191,7 @@ class EmprendimientoController {
         }
         [emprendimiento: emprendi]
     }
-
+    @Secured(['ROLE_ADMIN','ROLE_USER'])
     def uploadFeaturedImage(FeaturedImageCommand cmd) {
         if (cmd == null) {
             notFound()
@@ -192,6 +222,7 @@ class EmprendimientoController {
         //flash.message = crudMessageService.message(CRUD.UPDATE, domainName(locale), cmd.id, locale)
         redirect emprendimiento
     }
+    @Secured(['ROLE_ADMIN','ROLE_USER'])
     def featuredImage(Long id) {
         Emprendimiento emprendimiento = emprendimientoService.get(id)
         if (!emprendimiento || emprendimiento.featuredImageBytes == null) {
@@ -204,7 +235,7 @@ class EmprendimientoController {
 
     def exportService
 
-
+    @Secured(['ROLE_ADMIN','ROLE_USER'])
     def export() {
 
         if (!params.max) params.max = 10

@@ -37,6 +37,7 @@
                         <option value="emprendedor">emprendedor</option>
                         <option value="investigador">investigador</option>
                     </select>
+                  <input type="password" name="password" id="password">
                 </div>
                 </fieldset>
                 <fieldset class="buttons">

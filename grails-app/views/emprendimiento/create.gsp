@@ -6,14 +6,9 @@
         <title><g:message code="default.create.label" args="[entityName]" /></title>
     </head>
     <body>
-        <a href="#create-emprendimiento" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-        <div class="nav" role="navigation">
-            <ul>
-                <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-                <li><g:link class="list" action="index"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-            </ul>
-        </div>
-        <div id="create-emprendimiento" class="content scaffold-create" role="main">
+    <g:form resource="${this.emprendimiento}" method="POST">
+    <div id="show-emprendimiento" class="contentShow" role="main">
+
             <h1><g:message code="default.create.label" args="[entityName]" /></h1>
             <g:if test="${flash.message}">
             <div class="message" role="status">${flash.message}</div>
@@ -25,22 +20,29 @@
                 </g:eachError>
             </ul>
             </g:hasErrors>
-            <g:form resource="${this.emprendimiento}" method="POST">
-                <fieldset class="form">
-                    <f:all bean="emprendimiento" except="featuredImageBytes,habilitado,featuredImageContentType"/>
+
+                <div class="creacion">
+                    <div class="fieldcontain">
+                        <label for="nombre">Nombre del emprendimiento </label><input type="text" name="nombre" value="" id="nombre">
+                    </div>
+                    <div class="fieldcontain">
+                        <label for="usuario">Nombre del dueño </label><input type="text" name="usuario" value="" id="usuario">
+                    </div>
+                    <f:all bean="emprendimiento" except="featuredImageBytes,habilitado,featuredImageContentType,usuario,nombre"/>
 
                     <div class="crear">
                         <label for="habilitado">Emprendimiento habilitado</label>
                     <input type="hidden" name="_habilitado"><input type="checkbox" name="habilitado" id="habilitado">
                     </div>
 
-                </fieldset>
+                </div>
+    <fieldset class="botonesDelShow">
 
-                <fieldset class="buttons">
-                    <g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
-                </fieldset>
-            </g:form>
+       <g:submitButton name="create" class="btn btn-success" value="${message(code: 'default.button.create.label', default: 'Create')}" />
 
+
+    </fieldset>
         </div>
+        </g:form>
     </body>
 </html>
