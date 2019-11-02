@@ -7,28 +7,34 @@
 </head>
 <body>
 <a href="#list-emprendimiento" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-<div class="nav" role="navigation">
-    <ul>
-        <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-        <li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
-    </ul>
-</div>
-<div id="list-emprendimiento" class="content scaffold-list" role="main">
+
+<div style="text-align: center">
     <!--<h1><g:message code="default.list.label" args="[entityName]" /></h1>-->
-    <h1>Lista de emprendimientos</h1>
+    <h2 style="font-family: 'Font Awesome 5 Free';color:black">Lista de emprendimientos</h2>
 
     <g:if test="${flash.message}">
         <div class="message" role="status">${flash.message}</div>
     </g:if>
 
 
-    <f:table collection="${this.list}" except="featuredImageBytes,featuredImageContentType" />
-
+    <g:each in='${this.list}'>
+        <ul class="list-group" style="margin: 0.5rem">
+            <li class="list-group-item active">Nombre: ${it.nombre}</li>
+            <li class="list-group-item">Dueño: ${it.usuario}</li>
+            <li class="list-group-item">Direccion: ${it.direccion}</li>
+            <li class="list-group-item">Telefono: ${it.telefono}</li>
+            <li class="list-group-item">Estado de habilitacion:${it.habilitado}</li>
+            <li class="list-group-item">Descripcion: ${it.descripcion}</li>
+            <li class="list-group-item">Rubro: ${it.rubro}</li>
+            <li class="list-group-item">Ambito: ${it.ambito}</li>
+        </ul>
+        <br>
+    </g:each>
     <form class= method="POST" action="/excelExport/filtro">
                 <button class="btn btn-primary" name="filt" id="filt" value="${this.list.id}"
                 type="submit">
 
-                    <i class="far fa-file-excel"></i>
+                    <i class="far fa-file-excel"> Generar Excel</i>
                 </button>
 
 

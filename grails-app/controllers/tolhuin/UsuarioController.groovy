@@ -75,6 +75,32 @@ class UsuarioController {
         }
     }
 
+    @Secured(['ROLE_ADMIN','ROLE_MINISTERIO','ROLE_ADMINISTRADOR'])
+    def cambiarRol(){
+        Usuario user=Usuario.findById(params.id)
+        def role= Role.findByAuthority('ROLE_ADMIN')
+        switch (user.tipo){
+            case 'administrador' :role =Role.findByAuthority('ROLE_ADMIN');
+            case 'municipalidad' : role =Role.findByAuthority('ROLE_MINISTERIO');
+            case 'emprendedor' : role =Role.findByAuthority('ROLE_EMPRENDEDOR');
+            case 'investigador' : role =Role.findByAuthority('ROLE_INVESTIGADOR');
+
+        }
+        def rl= Role.findByAuthority('ROLE_ADMIN')
+        switch (params.tipo){
+            case 'administrador' :rl=Role.findByAuthority('ROLE_ADMIN');
+            case 'municipalidad' : rl =Role.findByAuthority('ROLE_MINISTERIO');
+            case 'emprendedor' : rl =Role.findByAuthority('ROLE_EMPRENDEDOR');
+            case 'investigador' : rl =Role.findByAuthority('ROLE_INVESTIGADOR');
+
+        }
+        UserRole userrole=UserRole.findByUserAndRole(user.user)
+        userrole.setRole([rl])
+       /* print(getAuthenticatedUser().getUsuario())*/
+
+
+    }
+
     def edit(Long id) {
         respond usuarioService.get(id)
     }

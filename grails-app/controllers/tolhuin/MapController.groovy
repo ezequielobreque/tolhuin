@@ -29,7 +29,7 @@ class MapController {
     }
     def mapa(String id,String buscar,String rubro,String ambito,String sector ) {
         print(id)
-        def emp
+        Emprendimiento emp
         if (id!=null) {
             emp = Emprendimiento.findById(id.toInteger())
 
@@ -38,7 +38,7 @@ class MapController {
         def json=JsonOutput.toJson(null)
 
         if(emp!=null) {
-            json = JsonOutput.toJson([nombre: emp.nombre, rubro: emp.rubro.nombre, sector: emp.rubro.sector.nombre, longitud: emp.longitud, latitud: emp.latitud, direccion: emp.direccion, telefono: emp.telefono])
+            json = JsonOutput.toJson([nombre: emp.nombre,usuario:emp.usuario,telefono:emp.telefono, rubro: emp.rubro.nombre, sector: emp.rubro.sector.nombre, longitud: emp.longitud, latitud: emp.latitud, direccion: emp.direccion, telefono: emp.telefono])
         }
 
         def List = Emprendimiento.getAll()
@@ -118,7 +118,7 @@ class MapController {
 
         if (List != null) {
             List.each {
-                aray.add([id: it.id, nombre: it.nombre, ambito:it.ambito.nombre,rubro: it.rubro.nombre, sector: it.rubro.sector.nombre, longitud: it.longitud, latitud: it.latitud, direccion: it.direccion, imagen: it.featuredImageBytes, telefono: it.telefono])
+                aray.add([id: it.id,telefono:it.telefono,usuario:it.user, nombre: it.nombre, ambito:it.ambito.nombre,rubro: it.rubro.nombre, sector: it.rubro.sector.nombre, longitud: it.longitud, latitud: it.latitud, direccion: it.direccion, imagen: it.featuredImageBytes, telefono: it.telefono])
             }
 
 

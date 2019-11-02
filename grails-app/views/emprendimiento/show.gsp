@@ -74,7 +74,7 @@
             </g:if>
             <div class="crear">
             <g:if test="${this.emprendimiento.featuredImageBytes}">
-                <img src="<g:createLink controller="emprendimiento" action="featuredImage" id="${this.emprendimiento.id}"/>" width="400"/>
+                <img src="<g:createLink controller="emprendimiento" action="featuredImage" id="${this.emprendimiento.id}"/>" width="100%" STYLE="margin:1rem"/>
             </g:if>
             <f:display bean="emprendimiento" except="featuredImageBytes,featuredImageContentType" />
 

@@ -11,12 +11,12 @@ class MainController {
 
     def index() {
     	respond Emprendimiento.list()
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+		/*Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (!(authentication instanceof AnonymousAuthenticationToken)) {
 			Usuario us=authenticatedUser.getUsuario()
 
-		}
-		print(User.findByUsername('alguno').getUsuario())
+		}*/
 
 
 

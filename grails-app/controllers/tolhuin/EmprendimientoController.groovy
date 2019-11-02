@@ -144,7 +144,7 @@ class EmprendimientoController {
 
     }
 
-    @Secured(['ROLE_ADMIN','ROLE_USER'])
+    @Secured(['ROLE_ADMIN','ROLE_MINISTERIO','ROLE_INVESTIGADOR','ROLE_ADMINISTRADOR','ROLE_EMPRENDEDOR'])
     def update(Emprendimiento emprendimiento) {
         if (emprendimiento == null) {
             notFound()
@@ -183,7 +183,7 @@ class EmprendimientoController {
             '*'{ render status: NO_CONTENT }
         }
     }
-    @Secured(['ROLE_ADMIN','ROLE_USER'])
+    @Secured(['ROLE_ADMIN','ROLE_MINISTERIO','ROLE_INVESTIGADOR','ROLE_ADMINISTRADOR','ROLE_EMPRENDEDOR'])
     def editFeaturedImage(Long id) {
         Emprendimiento emprendi = emprendimientoService.get(id)
         if (!emprendi) {
@@ -191,7 +191,7 @@ class EmprendimientoController {
         }
         [emprendimiento: emprendi]
     }
-    @Secured(['ROLE_ADMIN','ROLE_USER'])
+    @Secured(['ROLE_ADMIN','ROLE_MINISTERIO','ROLE_INVESTIGADOR','ROLE_ADMINISTRADOR','ROLE_EMPRENDEDOR'])
     def uploadFeaturedImage(FeaturedImageCommand cmd) {
         if (cmd == null) {
             notFound()
@@ -222,7 +222,7 @@ class EmprendimientoController {
         //flash.message = crudMessageService.message(CRUD.UPDATE, domainName(locale), cmd.id, locale)
         redirect emprendimiento
     }
-    @Secured(['ROLE_ADMIN','ROLE_USER'])
+    @Secured(['ROLE_ANONYMOUS','ROLE_ADMIN','ROLE_MINISTERIO','ROLE_INVESTIGADOR','ROLE_ADMINISTRADOR','ROLE_EMPRENDEDOR'])
     def featuredImage(Long id) {
         Emprendimiento emprendimiento = emprendimientoService.get(id)
         if (!emprendimiento || emprendimiento.featuredImageBytes == null) {

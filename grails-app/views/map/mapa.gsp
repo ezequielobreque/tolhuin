@@ -12,6 +12,7 @@
             integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
             crossorigin=""></script>
     <asset:javascript src="leaflet-providers.js"/>
+    <asset:javascript src="oficinas.js"/>
     <meta charset="UTF-8">
     <title>Title</title>
     <style>
@@ -29,8 +30,8 @@
         -webkit-box-sizing: content-box;
         -moz-box-sizing: content-box;
         box-sizing: content-box;
-        max-width: 250px;
-        max-height: 250px;
+        max-width: 100%;
+        max-height: 100%;
         padding: 20px;
         overflow: hidden;
         border: 1px solid;
@@ -111,18 +112,18 @@
                 var marker = L.marker([item.latitud,item.longitud]).addTo(mymap);
 
                 marker.bindPopup("<div class='boxcode'>" +
-                    '<div class="col-sm-12">'+
-                    '<div class="card text-white bg-success mb-3" style="max-width: 250px;max-height: 250px">'+
-                        "<h3>"+item.nombre+"<h3>" +
+                    ''+
+                    ''+
+                        "<h1>"+item.nombre+"</h1>" +
                     "<br>" +
-
-
-                    "<a>Ambito:"+item.ambito+"</a>"+
+                    "<a>dueño: "+item.usuario+"</a> <br>" +
+                    "<a>telefono: "+item.telefono+"</a> <br>" +
+                    "<a>Ambito: "+item.ambito+"</a>"+
                         "<br>"+
-                    "<a>Rubro:"+item.rubro+"</a>"+
+                    "<a>Rubro: "+item.rubro+"</a>"+
                         "<br>"+
 
-                    "<a> Direccion:"+item.direccion+"</a>" +
+                    "<a> Direccion: "+item.direccion+"</a>" +
                     "</div>"   );
 
 
@@ -153,6 +154,85 @@
         .setContent("I am a standalone popup.")
         .openOn(mymap);*/
 
+    var geojsonFeature = {
+        "type": "Feature",
+        "properties": {
+            "name": "Coors Field",
+            "amenity": "Baseball Stadium",
+            "popupContent": "This is where the Rockies play!"
+        },
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+                -67.194205,
+                -54.51203
+            ]
+        }
+    };
+
+
+    var geomap=[{
+        "type":"Feature",
+        "properties":{
+            "id":460,
+            "udaiId":310,
+            "type":"UDAI",
+            "name":"Río Grande",
+            "depends":"",
+            "address_line1":"Espora 503",
+            "address_line2":"Río Grande",
+            "address_line3":"",
+            "postal_code":"9420",
+            "state":"Tierra del Fuego",
+            "time":"8.00 a 14.00hs"
+        },
+        "geometry":{
+            "type":"Point",
+            "coordinates":[
+                -67.695149,
+                -53.786287
+            ]
+        }
+    },
+        {
+            "type":"Feature",
+            "properties":{
+                "id":461,
+                "udaiId":655,
+                "type":"Oficina",
+                "name":"Tolhuin",
+                "depends":"UDAI Río Grande",
+                "address_line1":"Rafaela Isthon 269",
+                "address_line2":"Tolhuin",
+                "address_line3":"Tierra del Fuego",
+                "postal_code":"9412",
+                "state":"Tierra del Fuego",
+                "time":"8.00 a 14.00hs"
+
+            },
+            "geometry":{
+                "type":"Point",
+                "coordinates":[
+                    -67.194205,
+                    -54.51203
+                ]
+            }
+        }];
+
+    var geojsonMarkerOptions = {
+        radius: 8,
+        fillColor: "#ff7800",
+        color: "#000",
+        weight: 1,
+        opacity: 1,
+        fillOpacity: 0.8
+    };
+
+    /*L.geoJSON(worldMap, {
+        pointToLayer: function (feature, latlng) {
+            return L.circleMarker(latlng, geojsonMarkerOptions);
+        }
+    }).addTo(mymap);*/
 
 
 
@@ -167,6 +247,13 @@
     });
     var baseMaps = {
     };
+
+
+    var anses =L.geoJSON(worldMap, {
+        pointToLayer: function (feature, latlng) {
+            return L.circleMarker(latlng, geojsonMarkerOptions);
+        }
+    });
     var ejido = L.tileLayer.wms('http://catastro.tolhuin.gob.ar/geoserver/ows?', {
             layers: "tierras:gis_tolh_ejido",
             format: 'image/png',
@@ -228,7 +315,7 @@
             width: '286'
         })
     ;
-    var MacizosProvisorios =L.tileLayer.wms('http://catastro.tolhuin.gob.ar/geoserver/ows?', {
+     var MacizosProvisorios =L.tileLayer.wms('http://catastro.tolhuin.gob.ar/geoserver/ows?', {
             layers: "tierras:Macizos Provisorios general lineas",
             format: 'image/png',
             INFO_FORMAT:'application',
@@ -273,6 +360,7 @@
 
 
     var overlays={
+        "anses":anses,
         "Macizos Urbanos general":   MacizosUrbanosGeneral,
         "Zonficacion":  Zonficacion,
         "Parcelas Rural": ParcelasRural,
@@ -285,9 +373,11 @@
         "turistico": turisitico,
         "Ejido":ejido
     };
+
     L.control.layers(baseMaps,overlays).addTo(mymap);
 
     basemaps.Countries.addTo(mymap);
+
 
 
 

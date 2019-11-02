@@ -76,7 +76,7 @@
 <div id="wrapper">
 
 	<!-- Sidebar -->
-	<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+	<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar" style="margin-top:4.375rem">
 
 		<!-- Sidebar - Brand -->
 		<a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
@@ -202,12 +202,10 @@
 	<div id="content-wrapper" class="d-flex flex-column">
 
 
-	<!-- Main Content -->
-	 <div class="content2" >
 	   %{--<div class="content2">--}%
 			%{--<div class="content3">--}%
 			<!-- Topbar -->
-			<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+			<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 fixed-top shadow">
 
 				<!-- Sidebar Toggle (Topbar) -->
 				<button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
@@ -218,7 +216,7 @@
 
 				<form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" method="get" action="/emprendimiento/busqueda">
 					<div class="input-group">
-						<input type="text" class="form-control bg-light border-0 small" name="buscar" id="buscar" placeholder="Bsucar Emprendimientos.." aria-label="Search" aria-describedby="basic-addon2">
+						<input type="text" class="form-control bg-light border-0 small" name="buscar" id="buscar" placeholder="Buscar Emprendimientos.." aria-label="Search" aria-describedby="basic-addon2">
 						<div class="input-group-append">
 							<button class="btn btn-primary" type="submit" name="actions" value="filtro">
 								<i class="fas fa-search fa-sm"></i>
@@ -260,7 +258,7 @@
 						</a>
 						<!-- Dropdown - Messages -->
 						<div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
-							<form class="form-inline mr-auto w-100 navbar-search">
+							<!--<form class="form-inline mr-auto w-100 navbar-search">
 								<div class="input-group">
 									<input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
 									<div class="input-group-append">
@@ -269,7 +267,40 @@
 										</button>
 									</div>
 								</div>
-							</form>
+							</form>-->
+		<form method="get" action="/emprendimiento/busqueda">
+			<div class="input-group">
+				<input type="text" class="form-control bg-light border-0 small" name="buscar" id="buscar" placeholder="Buscar Emprendimientos.." aria-label="Search" aria-describedby="basic-addon2">
+				<div class="input-group-append">
+					<button class="btn btn-primary" type="submit" name="actions" value="filtro">
+						<i class="fas fa-search fa-sm"></i>
+					</button>
+					<button class="btn btn-primary" type="submit" name="actions" value="mapa">
+						<i class="fas fa-map-marked-alt"></i>
+					</button>
+				</div>
+
+			</div>
+			<select class="form-control form-control-sm" name="rubro">
+				<option disabled selected value>Rubro..</option>
+				<g:each in="${tolhuin.Rubro.list()}">
+					<option value="${it.nombre}">${it.nombre}</option>
+				</g:each>
+
+			</select>
+			<select class="form-control form-control-sm" name="ambito">
+				<option disabled selected value>Ambito..</option>
+				<option value="PRIVADO">Privado</option>
+				<option value="ESTATAL">Estatal</option>
+
+			</select>
+			<select class="form-control form-control-sm" name="sector">
+				<option disabled selected value>Sector..</option>
+				<option value="PRIMARIO">Primario</option>
+				<option value="SECUNDARIO">Secundario</option>
+				<option value="TERCIARIO">Terciario</option>
+			</select>
+		</form>
 						</div>
 					</li>
 
@@ -412,11 +443,14 @@
 
 			</nav>
 			<!-- End of Topbar -->
-
+	<div class="content2" style="margin-top:4.375rem" >
 			<g:layoutBody/>
        %{--</div>--}%
-	%{--</div>--}%
-</div>
+			%{--</div>--}%
+			<!-- Main Content -->
+
+
+	</div>
 <!-- End of Main Content -->
 
 <!-- Footer -->

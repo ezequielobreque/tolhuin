@@ -11,7 +11,7 @@
 
 
  %{--<f:table collection="${emprendimientoList}" />--}%
-<div class="row">
+<div class="row" style="margin-top: 1rem">
 <g:each in="${emprendimientoList}">
 
 
