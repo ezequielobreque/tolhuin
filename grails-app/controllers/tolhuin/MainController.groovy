@@ -15,8 +15,6 @@ class MainController {
 			/*User us=authenticatedUser
 				print(	us.getAuthorities())*/
 
-		print(Usuario.get(1).emprendimientos)
-
 
 
 		/*if (!(auth instanceof AnonymousAuthenticationToken)) {

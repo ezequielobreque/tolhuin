@@ -4,17 +4,11 @@
         <meta name="layout" content="main" />
         <g:set var="entityName" value="${message(code: 'emprendimiento.label', default: 'Emprendimiento')}" />
         <title><g:message code="default.edit.label" args="[entityName]" /></title>
+        <asset:stylesheet href="mycss.css"></asset:stylesheet>
     </head>
     <body>
         <a href="#edit-emprendimiento" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-        <div class="nav" role="navigation">
-            <ul>
-                <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-                <li><g:link class="list" action="index"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-                <li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
-            </ul>
-        </div>
-        <div id="edit-emprendimiento" class="content scaffold-edit" role="main">
+        <div id="edit-emprendimiento" class="contentShow"  role="main">
             <h1><g:message code="default.edit.label" args="[entityName]" /></h1>
             <g:if test="${flash.message}">
             <div class="message" role="status">${flash.message}</div>
@@ -28,8 +22,17 @@
             </g:hasErrors>
             <g:form resource="${this.emprendimiento}" method="PUT">
                 <g:hiddenField name="version" value="${this.emprendimiento?.version}" />
-                <fieldset class="form">
+                <fieldset class="form" style="text-align: initial">
                     <f:all bean="emprendimiento" except="featuredImageBytes,featuredImageContentType"/>
+                <sec:ifAnyGranted roles="ROLE_MINISTERIO,ROLE_ADMIN,ROLE_ADMINISTRADOR">
+                    <div class="fieldcontain"><label for="validado">validado</label><input type="hidden" name="_validado"><input type="checkbox"
+                        <g:if test="${this.emprendimiento.validado==true}">
+                            checked="checked"
+                        </g:if>
+                                                                                                                                 name="validado" id="validado">
+
+                    </div>
+                </sec:ifAnyGranted>
                 </fieldset>
                 <fieldset class="buttons">
                     <input class="save" type="submit" value="${message(code: 'default.button.update.label', default: 'Update')}" />
