@@ -77,9 +77,10 @@ class EmprendimientoController {
 
 
     }
-
+    @Secured(['ROLE_ADMIN','ROLE_MINISTERIO','ROLE_ADMINISTRADOR'])
     def index() {
-    respond emprendimientoService.list()
+     def List=emprendimientoService.list()
+        [list:List]
     }
 
     def show(Long id) {
@@ -87,8 +88,11 @@ class EmprendimientoController {
     }
     @Secured(['ROLE_ADMIN','ROLE_MINISTERIO','ROLE_INVESTIGADOR','ROLE_ADMINISTRADOR','ROLE_EMPRENDEDOR'])
     def create() {
-
-        respond new Emprendimiento(params)
+        Emprendimiento emp= new Emprendimiento(params)
+       /* print(params.latitud)
+        emp.setLatitud(params.latitud as Double)
+        emp.setLongitud(params.longitud as Double)*/
+        respond emp
     }
     @Secured(['ROLE_ADMIN','ROLE_MINISTERIO','ROLE_INVESTIGADOR','ROLE_ADMINISTRADOR','ROLE_EMPRENDEDOR'])
     def save(Emprendimiento emprendimiento) {
@@ -135,10 +139,11 @@ class EmprendimientoController {
 
 
             Usuario us=getAuthenticatedUser().getUsuario()
-            if (us.emprendimientos.contains(emprendimientoService.get(id))) {
+            if (us.emprendimientos.contains(emprendimientoService.get(id))||us.user.authorities.contains(Role.findByAuthority("ROLE_ADMIN"))||us.user.authorities.contains(Role.findByAuthority("ROLE_MINISTERIO"))) {
                 respond emprendimientoService.get(id)
             }else {
-                flash.message = "error"
+                flash.message =
+                redirect (controller: "emprendimiento",action: "show",id:id)
             }
         }
 
@@ -178,7 +183,7 @@ class EmprendimientoController {
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.deleted.message', args: [message(code: 'emprendimiento.label', default: 'Emprendimiento'), id])
-                redirect action:"index", method:"GET"
+                redirect controller: "main", action:"index"
             }
             '*'{ render status: NO_CONTENT }
         }

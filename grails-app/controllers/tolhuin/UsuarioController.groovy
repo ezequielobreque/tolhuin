@@ -14,12 +14,12 @@ class UsuarioController {
         params.max = Math.min(max ?: 10, 100)
         respond usuarioService.list(params), model:[usuarioCount: usuarioService.count()]
     }
-
+    @Secured(['ROLE_ADMIN','ROLE_MINISTERIO','ROLE_ADMINISTRADOR'])
     def show(Long id) {
         respond usuarioService.get(id)
 
     }
-
+    @Secured(['ROLE_ANONYMOUS','ROLE_ADMIN','ROLE_MINISTERIO','ROLE_ADMINISTRADOR'])
     def create() {
 
        respond new Usuario(params)
@@ -27,7 +27,15 @@ class UsuarioController {
 
 
     }
+    @Secured(['ROLE_ADMIN','ROLE_MINISTERIO','ROLE_ADMINISTRADOR','ROLE_EMPRENDEDOR','ROLE_INVESTIGADOR'])
+    def misEmprendimientos(){
 
+        Usuario us=getAuthenticatedUser().getUsuario()
+        def lista= us.emprendimientos
+
+        [lista:lista]
+    }
+    @Secured(['ROLE_ANONYMOUS','ROLE_ADMIN','ROLE_MINISTERIO','ROLE_ADMINISTRADOR'])
     def save(Usuario usuario) {
         if (usuario == null) {
             notFound()
@@ -40,11 +48,10 @@ class UsuarioController {
             print('llege')
             def role= Role.findByAuthority('ROLE_ADMIN');
             switch (usuario.tipo){
-                case 'administrador' :role=Role.findByAuthority('ROLE_ADMIN');
-                case 'municipalidad' : role =Role.findByAuthority('ROLE_MINISTERIO');
-                case 'emprendedor' : role =Role.findByAuthority('ROLE_EMPRENDEDOR');
-                case 'investigador' : role =Role.findByAuthority('ROLE_INVESTIGADOR');
-                default : role = Role.findByAuthority('ROLE_EMPRENDEDOR');
+                case 'administrador' :role= Role.findByAuthority('ROLE_ADMIN');break;
+                case 'municipalidad' : role = Role.findByAuthority('ROLE_MINISTERIO');break;
+                case 'emprendedor' : role = Role.findByAuthority('ROLE_EMPRENDEDOR');break;
+                case 'investigador' : role = Role.findByAuthority('ROLE_INVESTIGADOR');break;
             }
             usuarioService.save(usuario)
             print(usuario)
@@ -61,45 +68,46 @@ class UsuarioController {
 
         if (usuario!=null){
 
-            if(usuario.tipo=='emprendedor'){
-
-                flash.message = "Su usuario ha sido creado ahora ingrese los datos de su emprendimiento"
-
-                redirect(controller: "Emprendimiento", action: "create")
-
-
-            }else{redirect usuario}
+                redirect(controller:"main",action: "index")
 
         }else{
             flash.errorUsuario=true
         }
     }
 
+
+    /*def cambiarRol(){
+        Usuario usuario=Usuario.findById(params.id)
+
+        def rl= Role.findByAuthority(user.user.getAuthorities())
+        User user = User.get(usuario.user)
+        user.user.setAuthorities(rl)
+        print(user.user.getAuthorities())
+
+
+    }*/
+
+
+    def springSecurityService
     @Secured(['ROLE_ADMIN','ROLE_MINISTERIO','ROLE_ADMINISTRADOR'])
     def cambiarRol(){
-        Usuario user=Usuario.findById(params.id)
-        def role= Role.findByAuthority('ROLE_ADMIN')
-        switch (user.tipo){
-            case 'administrador' :role =Role.findByAuthority('ROLE_ADMIN');
-            case 'municipalidad' : role =Role.findByAuthority('ROLE_MINISTERIO');
-            case 'emprendedor' : role =Role.findByAuthority('ROLE_EMPRENDEDOR');
-            case 'investigador' : role =Role.findByAuthority('ROLE_INVESTIGADOR');
 
+        User user = User.get(springSecurityService.principal.id) //get the user
+        User nuevo= new User(username: '' ,password: '')
+        nuevo.properties=User.get(springSecurityService.principal.id).properties
+        Role adminRole = Role.findByAuthority('ROLE_ADMIN')
+        UserRole.remove user, adminRole // remove admin Role
+
+        Role userRole = Role.findByAuthority('ROLE_ADMINISTRADOR')
+                UserRole.create user,userRole  //add the user Role
+
+
+        if (!user.hasErrors() && user.save(flush: true)) {
+            springSecurityService.reauthenticate user.username // refresh the users security deatils
         }
-        def rl= Role.findByAuthority('ROLE_ADMIN')
-        switch (params.tipo){
-            case 'administrador' :rl=Role.findByAuthority('ROLE_ADMIN');
-            case 'municipalidad' : rl =Role.findByAuthority('ROLE_MINISTERIO');
-            case 'emprendedor' : rl =Role.findByAuthority('ROLE_EMPRENDEDOR');
-            case 'investigador' : rl =Role.findByAuthority('ROLE_INVESTIGADOR');
-
-        }
-        UserRole userrole=UserRole.findByUserAndRole(user.user)
-        userrole.setRole([rl])
-       /* print(getAuthenticatedUser().getUsuario())*/
-
-
     }
+
+
 
     def edit(Long id) {
         respond usuarioService.get(id)

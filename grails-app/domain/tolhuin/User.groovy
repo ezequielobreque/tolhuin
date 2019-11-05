@@ -22,6 +22,9 @@ class User implements Serializable {
     Set<Role> getAuthorities() {
         (UserRole.findAllByUser(this) as List<UserRole>)*.role as Set<Role>
     }
+    void setAuthorities(Role rol) {
+        (UserRole.findAllByUser(this) as List<UserRole>)*.role=rol
+    }
 
     static constraints = {
         password nullable: false, blank: false, password: true
@@ -33,7 +36,7 @@ class User implements Serializable {
         return this.usuario
 
     }
-    Usuario setUsuario(Usuario us){
+    void setUsuario(Usuario us){
         this.usuario=us
         us.setUser(this)
 

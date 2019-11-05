@@ -7,7 +7,7 @@ class Emprendimiento {
     Double latitud
     Double longitud
     String direccion
-    Boolean validado
+    Boolean validado=false
     Boolean habilitado
     String foto
     Rubro rubro
@@ -27,9 +27,9 @@ class Emprendimiento {
         latitud display: false, nullable:true
         longitud display: false, nullable:true
         descripcion display:true, nullable: true
-        direccion nullable: true;
+        direccion nullable: true
         validado display: false, nullable:true
-        habilitado nullable: true;
+        habilitado nullable: true
         foto nullable: true, display:false
         rubro nullable: true
         ambito nullable: true
@@ -37,10 +37,10 @@ class Emprendimiento {
         //detalle nullable:true
         investigador display: false, nullable:true
         featuredImageBytes nullable: true
-
         featuredImageContentType nullable: true
     }
     static mapping = {
         featuredImageBytes column: 'featured_image_bytes', sqlType: 'longblob'
+
     }
 }

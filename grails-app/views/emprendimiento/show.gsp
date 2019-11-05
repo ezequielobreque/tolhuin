@@ -69,6 +69,7 @@
 
         <div id="show-emprendimiento" class="contentShow" role="main">
             <h1>${this.emprendimiento.nombre}</h1>
+
             <g:if test="${flash.message}">
             <div class="message" role="status">${flash.message}</div>
             </g:if>
@@ -80,7 +81,7 @@
 
         </div>
         <fieldset class="botonesDelShow">
-
+        <sec:ifAnyGranted roles="ROLE_MINISTERIO,ROLE_ADMIN,ROLE_ADMINISTRADOR">
 
             <g:link type="button" class="btn btn-google" action="edit" resource="${this.emprendimiento}" style="background-color:#f39c12 "><i class="fas fa-edit"> <g:message code="default.button.edit.label" default="Edit" /></i></g:link>
 
@@ -92,6 +93,28 @@
                         <i class="fas fa-trash"><input class="delete" type="submit" style=" color: white;border: aliceblue;background-color: #e74c3c" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" /></i>
 
             </g:form> </button>
+
+        </sec:ifAnyGranted>
+            <sec:ifAnyGranted roles="ROLE_EMPRENDEDOR">
+
+                <g:if test="${this.emprendimiento.user!=null}">
+                <g:if test="${sec.username() == this.emprendimiento.user.user.getUsername()}">
+
+                <g:link type="button" class="btn btn-google" action="edit" resource="${this.emprendimiento}" style="background-color:#f39c12 "><i class="fas fa-edit"> <g:message code="default.button.edit.label" default="Edit" /></i></g:link>
+
+
+
+
+                <button class="btn btn-borrado"> <g:form resource="${this.emprendimiento}" method="DELETE">
+
+                    <i class="fas fa-trash"><input class="delete" type="submit" style=" color: white;border: aliceblue;background-color: #e74c3c" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" /></i>
+                </g:form> </button>
+            </g:if>
+                </g:if>
+
+
+
+            </sec:ifAnyGranted>
 
                 <button class="btn btn-facebook"><g:link action="editFeaturedImage" resource="${this.emprendimiento}" style="color: white"><i class="fas fa-image">  agregar imagen</i></g:link></button>
 

@@ -10,13 +10,29 @@ import org.springframework.security.core.context.SecurityContextHolder
 class MainController {
 
     def index() {
-    	respond Emprendimiento.list()
 
-		/*Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		if (!(authentication instanceof AnonymousAuthenticationToken)) {
-			Usuario us=authenticatedUser.getUsuario()
 
+			/*User us=authenticatedUser
+				print(	us.getAuthorities())*/
+
+		print(Usuario.get(1).emprendimientos)
+
+
+
+		/*if (!(auth instanceof AnonymousAuthenticationToken)) {
+
+			print(name)
 		}*/
+
+
+	}
+	def Emprendimientos() {
+		respond Emprendimiento.list()
+
+		/*User us=authenticatedUser
+            print(	us.getAuthorities())*/
+
+
 
 
 

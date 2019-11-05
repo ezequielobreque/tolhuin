@@ -56,7 +56,7 @@ class BootStrap {
 
 		new Usuario(nombre: "abc", apellido: "def",nick:"admin", tipo: "administrador", contrasena:"admin" ).save()
 
-		new Usuario(nombre: "nuevo", apellido: "alguno",nick:"normal", tipo: "emprendedor", contrasena:"normal" ).save()
+		new Usuario(nombre: "emprendedor", apellido: "alguno",nick:"emprendedor", tipo: "emprendedor", contrasena:"normal" ).save()
 
     	def primario=new Sector(nombre:"PRIMARIO")
     	def secundario=new Sector(nombre:"SECUNDARIO")
@@ -177,7 +177,8 @@ class BootStrap {
 
 		def investigador = User.findOrSaveWhere(username: 'investigador' ,password: '12345')
 		def ministerio = User.findOrSaveWhere(username: 'ministerio' ,password: '12345')
-		def emprendedor = User.findOrSaveWhere(username: 'emprededor' ,password: '12345')
+		def emprendedor = User.findOrSaveWhere(username: 'emprendedor' ,password: '12345')
+		emprendedor.setUsuario(Usuario.findByNick('emprendedor'))
 
 		if(!admin.authorities.contains(adminRole)){
 
@@ -199,7 +200,7 @@ class BootStrap {
 
 
 
-		new Emprendimiento(nombre:"aserradero1",usuario: "carina", latitud: -54.5210, longitud: -67.2182, direccion:"abc 123", validado:true, habilitado:true,rubro:forestal,descripcion: "el mejor lugar para cortar leña de la cuidad", ambito:privado).save()
+		new Emprendimiento(nombre:"aserradero1",usuario: "carina", latitud: -54.5210, longitud: -67.2182, direccion:"abc 123", habilitado:true,rubro:forestal,descripcion: "el mejor lugar para cortar leña de la cuidad", ambito:privado).save()
     	new Emprendimiento(nombre:"huerta a",usuario: "maria", latitud: -54.5120, longitud: -67.1950, direccion:"abc def", validado:true, habilitado:true,rubro:HORTICOLA, ambito:privado).save()
     	new Emprendimiento(nombre:"vacas",usuario: "roberto", latitud: -54.5050, longitud: -67.1990, direccion:"zxc ef", validado:true, habilitado:true,rubro:ganadero, ambito:privado).save()
     	new Emprendimiento(nombre:"huerta b",usuario: "brian", latitud: -54.4990, longitud: -67.2082, direccion:"abc cda", validado:true, habilitado:true,rubro:HORTICOLA, ambito:privado).save()
