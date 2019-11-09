@@ -12,7 +12,7 @@
 
 %{--<f:table collection="${emprendimientoList}" />--}%
 <div class="row" style="margin-top: 1rem">
-    <g:each in="${emprendimientoList}">
+    <g:each in="${Emp}">
 
 
         <div class="col-sm-12 col-xl-3 col-md-6 col-lg-4 ">

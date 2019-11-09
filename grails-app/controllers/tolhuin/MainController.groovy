@@ -25,7 +25,10 @@ class MainController {
 
 	}
 	def Emprendimientos() {
-		respond Emprendimiento.list()
+
+		def Emp=Emprendimiento.list()
+
+		[Emp:Emp]
 
 		/*User us=authenticatedUser
             print(	us.getAuthorities())*/

@@ -49,6 +49,7 @@
         </g:else>
 
     </g:each>
+
     <form class= method="POST" action="/excelExport/filtro">
                 <button class="btn btn-primary" name="filt" id="filt" value="${this.list.id}"
                 type="submit">

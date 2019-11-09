@@ -117,11 +117,13 @@
 					<a class="collapse-item" href="/emprendimiento/index">Lista de Emprendimientos</a>
 					</sec:ifAnyGranted>
 						<a class="collapse-item" href="/main/Emprendimientos">Emprendimientos Populares</a>
-					<a class="collapse-item" href="/startbootstrap-sb-admin-2-gh-pages/cards.html">Descargas</a>
 					<sec:ifNotGranted roles='ROLE_ANONYMOUS'>
 					<a class="collapse-item" href="/emprendimiento/create">Nuevo Emprendimiento</a>
 						<a class="collapse-item" href="/usuario/misEmprendimientos">Mis Emprendimientos</a>
 					</sec:ifNotGranted>
+					<sec:ifAnyGranted roles='ROLE_MINISTERIO,ROLE_ADMIN,ROLE_ADMINISTRADOR'>
+						<a class="collapse-item" href="/excelImporter/index">Importar excel</a>
+					</sec:ifAnyGranted>
 				</div>
 			</div>
 		</li>

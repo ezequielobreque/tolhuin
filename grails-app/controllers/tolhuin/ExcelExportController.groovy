@@ -9,7 +9,7 @@ import java.lang.reflect.Array
 class ExcelExportController{
 
     def index() {
-        List<Emprendimiento> emprendimientos = Emprendimiento.list()
+        List<Emprendimiento> emprendimientos = Emprendimiento.findAllByValidado(true)
         def headers = ['nombre', 'local','celular','direccion','rubro', 'ambito', 'sector']
         def withProperties = ['usuario', 'nombre', 'telefono','direccion', 'rubro.nombre', 'ambito.nombre', 'rubro.sector.nombre']
 
@@ -22,19 +22,21 @@ class ExcelExportController{
 
     }
 
-    def filtro(String filt){
-        print(filt.replace("[",'').replace(']','').split(',').toList())
+    def filtro(String filt) {
+        print(filt.replace("[", '').replace(']', '').split(',').toList())
 
-       /* def intList=params.filt.toList()
+        /* def intList=params.filt.toList()
         for(String s : params.filt.toList()){
             intList.add(Integer.valueOf(s))};
         print(intList);*/
-        List<Emprendimiento> emprendimientos =Emprendimiento.getAll(filt.replace("[",'').replace(']','').split(',').toList())
+        try {
+            List<Emprendimiento> emprendimientos = Emprendimiento.getAll(filt.replace("[", '').replace(']', '').split(',').toList())
+
+            emprendimientos = emprendimientos.findAll { it.validado }
 
 
-
-        def headers = ['nombre', 'local','celular','direccion','rubro', 'ambito', 'sector']
-        def withProperties = ['usuario', 'nombre', 'telefono','direccion', 'rubro.nombre', 'ambito.nombre', 'rubro.sector.nombre']
+        def headers = ['nombre', 'local', 'celular', 'direccion', 'rubro', 'ambito', 'sector']
+        def withProperties = ['usuario', 'nombre', 'telefono', 'direccion', 'rubro.nombre', 'ambito.nombre', 'rubro.sector.nombre']
 
         new WebXlsxExporter().with {
             setResponseHeaders(response)
@@ -42,7 +44,8 @@ class ExcelExportController{
             add(emprendimientos, withProperties)
             save(response.outputStream)
         }
-
+    }catch(Exception ex){ flash.message = "no se puede generar un excel vacio"
+            redirect controller:"main"}
     }
 
     def PDF(int id){

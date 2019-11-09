@@ -12,7 +12,7 @@ class Emprendimiento {
     String foto
     Rubro rubro
     Ambito ambito
-    int telefono
+    long telefono
     String descripcion
     Usuario investigador
     byte[] featuredImageBytes
@@ -24,8 +24,8 @@ class Emprendimiento {
         nombre display:true,nullable: true ,unique:['direccion','usuario']
         usuario display:true,nullable: true ,unique: ['direccion','nombre']
         user display:false,nullable: true
-        latitud display: false, nullable:true
-        longitud display: false, nullable:true
+        latitud display: true, nullable:true
+        longitud display: true, nullable:true
         descripcion display:true, nullable: true
         direccion nullable: true
         validado display: false, nullable:true

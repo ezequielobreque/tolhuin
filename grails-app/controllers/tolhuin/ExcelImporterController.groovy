@@ -89,7 +89,9 @@ class ExcelImporterController {
 
                         def latitud
                         def longitud
-                        String direcion=v.direccion
+                        String direcion
+                        if(v.direccion!=null){
+                        direcion=v.direccion
                         String dire= direcion.replaceAll("[^A-Za-z0-9]", "+")
                         print(dire)
                         def get = new URL("https://geocoder.api.here.com/6.2/geocode.json?app_id=yRbrv8bfdmGRDhUlolXl&app_code=LzSuSfgDM53H-Bc1YCMU-g&searchtext=" +dire+ "+tolhuin+tierra+del+fuego").openConnection();
@@ -108,7 +110,8 @@ class ExcelImporterController {
                                 latitud=(-54.0000-Math.random())
                                 longitud=(-54.0000-Math.random())
 
-                            }
+                            }}else{longitud=null
+                            latitud=null}
                         def rubro=Rubro.findByNombre(v.rubro)
 
                         emprendimientoService.save(Emprendimiento.findByNombre(v.nro)?: new Emprendimiento(usuario:v.nombre,habilitado: true,nombre: local,direccion: v.direccion,rubro:rubro,ambito:ambito,longitud: longitud,latitud:latitud))
