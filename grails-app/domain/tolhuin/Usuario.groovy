@@ -5,6 +5,7 @@ import org.springframework.security.core.GrantedAuthority
 
 class Usuario {
     String nick
+    long dni
     String apellido
     String nombre
     String tipo
@@ -17,6 +18,7 @@ class Usuario {
     	nick unique:true
         apellido()
         nombre()
+        dni display:true,nullable:true
         tipo(inList:['administrador','municipalidad','emprendedor','investigador'])
         emprendimientos display:false, nullable: true
         user display :false,nullable: true

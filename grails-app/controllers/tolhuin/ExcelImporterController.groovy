@@ -72,6 +72,8 @@ class ExcelImporterController {
                         {
                             local=v.nombre
                         }*/
+
+                        def user=Usuario.findByDni(v.dni)
                         def rubros=Rubro.findAll()
                         def local=v.local;
                         print(v.local)
@@ -114,7 +116,7 @@ class ExcelImporterController {
                             latitud=null}
                         def rubro=Rubro.findByNombre(v.rubro)
 
-                        emprendimientoService.save(Emprendimiento.findByNombre(v.nro)?: new Emprendimiento(usuario:v.nombre,habilitado: true,nombre: local,direccion: v.direccion,rubro:rubro,ambito:ambito,longitud: longitud,latitud:latitud))
+                        emprendimientoService.save(Emprendimiento.findByNombre(v.nro)?: new Emprendimiento(usuario:v.nombre,habilitado: true,nombre: local,direccion: v.direccion,rubro:rubro,ambito:ambito,longitud: longitud,latitud:latitud,user: user))
 
                     }
 

@@ -121,6 +121,12 @@
                     <button onclick="generatePDF()" class="btn btn-danger" ><i class="fas fa-file-pdf"> Crear PDF</i></button>
 
 
+                    <form action="/map/mapa">
+                        <button type="submit" name="id" value="${this.emprendimiento.id}"     class="btn btn-success" style="align-content:center ">
+                            <i class="fas fa-map"> mapa</i>
+                        </button>
+                    </form>
+
 
         </fieldset>
         </div>
