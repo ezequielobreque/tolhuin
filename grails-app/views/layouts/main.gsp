@@ -151,13 +151,34 @@
 			</div>
 		</li>
 
+<sec:ifAnyGranted roles='ROLE_MINISTERIO,ROLE_INVESTIGADOR,ROLE_ADMIN,ROLE_ADMINISTRADOR'>
 		<!-- Nav Item - Tables -->
 		<li class="nav-item">
 			<a class="nav-link" href="/grafico/index">
 				<i class="fas fa-fw fa-chart-area"></i>
 				<span>Graficos</span></a>
 		</li>
+  </sec:ifAnyGranted>
+	`<sec:ifAnyGranted roles='ROLE_MINISTERIO,ROLE_ADMIN,ROLE_ADMINISTRADOR'>
 
+		<li class="nav-item">
+		<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+			<i class="fas fa-plus"></i>
+			<span> Extras </span>
+		</a>
+		<div id="collapseFour" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+			<div class="bg-white py-2 collapse-inner rounded">
+				<h6 class="collapse-header">Opciones:</h6>
+					<a class="collapse-item" href="/rubro/index">Rubros</a>
+				<a class="collapse-item" href="/ambito/index">Ambitos</a>
+					<a class="collapse-item" href="/sector/index">Sectores</a>
+					<a class="collapse-item" href="/usuario/index">Usuarios</a>
+
+
+			</div>
+		</div>
+	</li>
+				</sec:ifAnyGranted>
 		<!-- Divider -->
 		<hr class="sidebar-divider">
 

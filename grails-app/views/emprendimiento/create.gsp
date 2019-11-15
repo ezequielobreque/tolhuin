@@ -26,8 +26,8 @@
     <body>
 
 
-    <g:form resource="${this.emprendimiento}" method="POST">
     <div id="show-emprendimiento" class="contentShow" role="main">
+    <g:form resource="${this.emprendimiento}" method="POST">
 
             <h1><g:message code="default.create.label" args="[entityName]" /></h1>
             <g:if test="${flash.message}">
@@ -54,10 +54,18 @@
                         <label for="habilitado">Emprendimiento habilitado</label>
                     <input type="hidden" name="_habilitado"><input type="checkbox" name="habilitado" id="habilitado">
                     </div>
-                    <input type="text" id="longitud" name="longitud" />
-                    <input type="text" id="latitud" name="latitud" />
+                    <div class="fieldcontain">
+                        <label for="longitud">longitud </label><input type="text" id="longitud" name="longitud" />
+                    </div>
+                    <div class="fieldcontain">
+                        <label for="latitud">latitud </label><input type="text" id="latitud" name="latitud" />
+                    </div>
 
-
+        <div class="fieldcontain" style="text-align: center">
+                    <button  type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                        <i class="fas fa-map"> Elegir ubicacion en el mapa</i>
+                    </button>
+        </div>
 
 
 
@@ -69,13 +77,9 @@
 
 
     </fieldset>
-    </div>
         </g:form>
 
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-        Launch demo modal that contains the map container.
-    </button>
+    </div>
 
     <!-- Modal -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -83,7 +87,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                    <h4 class="modal-title" id="myModalLabel">Ubicacion en el mapa</h4>
                 </div>
                 <div class="modal-body">
 
@@ -92,7 +96,7 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Guardar</button>
                 </div>
             </div>
         </div>
@@ -125,9 +129,9 @@
                 .setLatLng(e.latlng)
                 .setContent("este es tu lugar en el mapa? " + e.latlng.toString())
                 .openOn(map);
-            var latitud=e.latlng.lat.toFixed(4);
+            var latitud=e.latlng.lat.toFixed(6);
 
-            var longitud=e.latlng.lng.toFixed(4);
+            var longitud=e.latlng.lng.toFixed(6);
             document.getElementById('latitud').value = latitud.replace(".",",");
             document.getElementById('longitud').value = longitud.replace(".",",");
         }
