@@ -6,8 +6,8 @@ class BootStrap {
     def init = { servletContext ->
 
     	environments {
-            development {
-                cargar()
+			production {
+               /*cargar()*/
             }
         }
 
