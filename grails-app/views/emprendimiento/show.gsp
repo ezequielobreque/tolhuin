@@ -86,6 +86,8 @@
             <g:link type="button" class="btn btn-google" action="edit" resource="${this.emprendimiento}" style="background-color:#f39c12 "><i class="fas fa-edit"> <g:message code="default.button.edit.label" default="Edit" /></i></g:link>
 
 
+            <button class="btn btn-facebook"><g:link action="editFeaturedImage" resource="${this.emprendimiento}" style="color: white"><i class="fas fa-image">  agregar imagen</i></g:link></button>
+
 
 
         <button class="btn btn-borrado"> <g:form resource="${this.emprendimiento}" method="DELETE">
@@ -105,6 +107,9 @@
 
 
 
+                    <button class="btn btn-facebook"><g:link action="editFeaturedImage" resource="${this.emprendimiento}" style="color: white"><i class="fas fa-image">  agregar imagen</i></g:link></button>
+
+
                 <button class="btn btn-borrado"> <g:form resource="${this.emprendimiento}" method="DELETE">
 
                     <i class="fas fa-trash"><input class="delete" type="submit" style=" color: white;border: aliceblue;background-color: #e74c3c" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" /></i>
@@ -116,10 +121,7 @@
 
             </sec:ifAnyGranted>
 
-                <button class="btn btn-facebook"><g:link action="editFeaturedImage" resource="${this.emprendimiento}" style="color: white"><i class="fas fa-image">  agregar imagen</i></g:link></button>
-
                     <button onclick="generatePDF()" class="btn btn-danger" ><i class="fas fa-file-pdf"> Crear PDF</i></button>
-
 
                     <form action="/map/mapa">
                         <button type="submit" name="id" value="${this.emprendimiento.id}"     class="btn btn-success" style="align-content:center ">
