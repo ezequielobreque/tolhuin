@@ -144,7 +144,22 @@
 
         }else{
         var marker = L.marker([emp.latitud, emp.longitud]).addTo(mymap);
-    marker.bindPopup("<div class='boxcode'><a>" + emp.nombre + "</a><br><a>I am a popup.</a></div>");
+        marker.bindPopup("<div class='boxcode'>" +
+            ''+
+            ''+
+            "<h1>"+emp.nombre+"</h1>" +
+            "<br>" +
+            "<a>dueño: "+emp.usuario+"</a> <br>" +
+            "<a>telefono: "+emp.telefono+"</a> <br>" +
+            "<a>Ambito: "+emp.ambito+"</a>"+
+            "<br>"+
+            "<a>Rubro: "+emp.rubro+"</a>"+
+            "<br>"+
+
+            "<a> Direccion: "+emp.direccion+"</a>" +
+            "</div>"
+        );
+
     }
     /*circle.bindPopup("I am a circle.");
     polygon.bindPopup("I am a polygon.");
@@ -383,7 +398,7 @@
 
     var popup = L.popup();
 
-    function onMapClick(e) {
+    function onMapClick(e){
         popup
             .setLatLng(e.latlng)
             .setContent("You clicked the map at " + e.latlng.toString())

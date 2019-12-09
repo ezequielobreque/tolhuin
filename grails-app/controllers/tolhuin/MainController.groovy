@@ -26,13 +26,12 @@ class MainController {
 	}
 	def Emprendimientos() {
 
-		def Emp=Emprendimiento.list()
+		def Emp=Emprendimiento.findAllByValidado(true)
 
 		[Emp:Emp]
 
 		/*User us=authenticatedUser
             print(	us.getAuthorities())*/
-
 
 
 

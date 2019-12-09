@@ -127,7 +127,7 @@
 			</div>
 			<div class="card-footer">
 				<div class="d-flex justify-content-center links">
-					no tienes cuenta,Registrate?<a href="../usuario/create">Registrarse</a>
+					<a> En caso de perder la contraseña contacte al administradorr</a>
 				</div>
 %{--				<div class="d-flex justify-content-center">
 					<a href="#">Forgot your password?</a>

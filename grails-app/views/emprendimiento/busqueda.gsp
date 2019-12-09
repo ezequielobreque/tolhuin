@@ -9,12 +9,19 @@
 <a href="#list-emprendimiento" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 
 <div style="text-align: center; margin: 3%">
+    <g:if test="${this.list.size()==0}">
+        <h1 style="margin: auto;width: 70%;color:rgba(255,255,255,.8);font-family: 'Font Awesome 5 Free';background-color: #4e73df   ;background-size: contain;border-radius: 10px">Nose se encontro ningun emprendimiento con ese filtro<h1>
+    </g:if>
+    <g:else>
     <!--<h1><g:message code="default.list.label" args="[entityName]" /></h1>-->
     <h2 style="font-family: 'Font Awesome 5 Free';color:black">Lista de emprendimientos</h2>
 
     <g:if test="${flash.message}">
         <div class="message" role="status">${flash.message}</div>
     </g:if>
+
+
+
 
 
     <g:each in='${this.list}'>
@@ -50,6 +57,8 @@
 
     </g:each>
 
+
+
     <form class= method="POST" action="/excelExport/filtro">
                 <button class="btn btn-primary" name="filt" id="filt" value="${this.list.id}"
                 type="submit">
@@ -60,7 +69,7 @@
 
     </form>
 
-
+    </g:else>
 </div>
 </body>
 </html>

@@ -381,7 +381,7 @@
 							<a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
 						</div>
 					</li>
-
+					m
 					<!-- Nav Item - Messages -->
 					<li class="nav-item dropdown no-arrow mx-1">
 						<a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

@@ -23,7 +23,7 @@ class EmprendimientoController {
 
             if(actions == 'mapa'){
                 redirect(controller:"map",action: "mapa",params: [buscar:buscar,rubro:rubro,ambito:ambito,sector:sector])
-            }else  if (actions =='filtro' ) {
+            }else if(actions =='filtro'){
 
             def amb=Ambito.findByNombreLike('%'+ambito+'%')
             def rub=Rubro.findByNombreLike('%'+rubro+'%')
@@ -126,7 +126,7 @@ class EmprendimientoController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'emprendimiento.label', default: 'Emprendimiento'), emprendimiento.id])
+                flash.message = message(code: 'default.created.message', args: [message(code: 'emprendimiento.label', default: 'Emprendimiento'), emprendimiento.nombre])
                 redirect emprendimiento
             }
             '*' { respond emprendimiento, [status: CREATED] }
@@ -165,7 +165,7 @@ class EmprendimientoController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'emprendimiento.label', default: 'Emprendimiento'), emprendimiento.id])
+                flash.message = message(code: 'default.updated.message', args: [message(code: 'emprendimiento.label', default: 'Emprendimiento'), emprendimiento.nombre])
                 redirect emprendimiento
             }
             '*'{ respond emprendimiento, [status: OK] }

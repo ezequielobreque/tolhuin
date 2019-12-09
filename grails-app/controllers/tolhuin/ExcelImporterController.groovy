@@ -10,7 +10,81 @@ class ExcelImporterController {
 
     EmprendimientoService emprendimientoService
 
-    def index() {}
+    def index(Boolean si, String dni,String dueno,String nombre,String direccion) {
+      if(si){
+
+          File file = new File("out.txt")
+        file.write "First line\n"
+
+
+
+        List<Emprendimiento> dnix
+        if(dni!=null) {
+            if(!dni.isEmpty()){
+            dnix = Emprendimiento.getAll(dni.replace("[", '').replace(']', '').split(',').toList())
+            }
+        }
+
+        if(dnix!=null){
+            if(!dnix.isEmpty()){
+                file.append( "los sieguientes emprendimientos que se cargaron no tienen dni asociado:\n")
+                dnix.each{file.append(  "emprendimiento:"+it.id+"\n")}
+            }
+        }
+        List<Emprendimiento> duenox
+        if(dueno!=null) {
+            if(!dueno.isEmpty()){
+            duenox = Emprendimiento.getAll(dueno.replace("[", '').replace(']', '').split(',').toList())
+        }}
+
+        if(duenox!=null){
+            if(!duenox.isEmpty()){\
+                file.append("los sieguientes emprendimientos que se cargaron no tienen nombre del dueño:\n")
+                duenox.each{file.append( "emprendimiento:"+it.id+"\n")}
+
+
+
+            }
+        }
+        List<Emprendimiento> nombrex
+        if(nombre!=null) {
+            if(!nombre.isEmpty()) {
+                nombrex = Emprendimiento.getAll(dueno.replace("[", '').replace(']', '').split(',').toList())
+            }}
+        if(nombrex!=null){
+            if(!nombrex.isEmpty()){
+                file.append( "los sieguientes emprendimientos que se cargaron no tienen nombre del local:\n")
+                nombrex.each{file.append( "emprendimiento:"+it.id+"\n")}
+
+
+            }
+        }
+        List<Emprendimiento> direccionx
+        if(direccion!=null) {
+            if(!direccion.isEmpty()){
+            direccionx = Emprendimiento.getAll(dni.replace("[", '').replace(']', '').split(',').toList())
+        }}
+
+        if(direccionx!=null){
+            if(!direccionx.isEmpty()){
+                file.append( "los sieguientes emprendimientos que se cargaron no tienen direccion:\n")
+                direccionx.each{file.append( "emprendimiento:"+it.id+"\n")}
+            }
+        }
+          print(file.text)
+
+          [text:file.text,dni: dni, dueno: dueno, nombre: nombre, direccion: direccion]
+        }
+
+        else {
+
+          [text:null,dni: dni, dueno: dueno, nombre: nombre, direccion: direccion]
+
+
+      }
+
+
+            }
         def uploadFile() {
             def file = request.getFile('excelFile')
             if(!file.empty) {
@@ -47,6 +121,12 @@ class ExcelImporterController {
                     }
                     values.add(map)
                 }
+                List<Emprendimiento> emprendimientosSinDni
+                List<Emprendimiento> emprendimientosSinDueno
+                List<Emprendimiento> emprendimientosSinNombre
+                List<Emprendimiento> emprendimientosSinDireccion
+
+
 
 
                 values.each { v ->
@@ -120,18 +200,57 @@ class ExcelImporterController {
                         emprendimientoService.save(Emprendimiento.findByNombre(v.nro)?: new Emprendimiento(usuario:v.nombre,habilitado: true,validado: true,nombre: local,direccion: v.direccion,rubro:rubro,ambito:ambito,longitud: longitud,latitud:latitud,user: user))
                         def emp= Emprendimiento.findByNombreAndDireccionAndUsuario(local,v.direccion,v.nombre)
                         if(user!=null&&user!=[]){
-                            user.addToEmprendimientos(emp);
+
+                            user.addToEmprendimientos(emp)
 
                         }
+                        if(emp.user!=null){
+
+
+                            emprendimientosSinDni.add(emp)
+
+                        }
+                        if(emp.usuario!=null){
+
+
+
+                            emprendimientosSinDueno.add(emp)
+                        }
+                        if(emp.nombre!=null){
+
+
+                            emprendimientosSinNombre.add(emp)
+
+                        }
+                        if(emp.direccion!=null){
+
+                            emprendimientosSinDireccion.add(emp)
+
+
+
+                        }
+
+
+
                     }
 
 
                 }
 
 
+
                 flash.message = "Subscriber imported successfully"
-                redirect action:"index"
+                redirect action:"index",params: [si: true,dni:emprendimientosSinDni,dueno:emprendimientosSinDueno,nombre:emprendimientosSinNombre,direccion:emprendimientosSinDireccion]
             }
         }
+
+
+    def log(String dni,String dueno,String nombre,String direccion){
+
+
+
+
+
+    }
 
 }

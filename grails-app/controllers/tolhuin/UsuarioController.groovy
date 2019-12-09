@@ -9,7 +9,7 @@ class UsuarioController {
     UsuarioService usuarioService
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
-
+    @Secured(['ROLE_ADMIN','ROLE_MINISTERIO','ROLE_ADMINISTRADOR'])
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond usuarioService.list(params), model:[usuarioCount: usuarioService.count()]
