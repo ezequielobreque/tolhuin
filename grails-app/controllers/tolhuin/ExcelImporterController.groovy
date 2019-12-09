@@ -14,7 +14,7 @@ class ExcelImporterController {
       if(si){
 
           File file = new File("out.txt")
-        file.write "First line\n"
+        file.write "Log de los pequeños problemas encontrados||"
 
 
 
@@ -27,8 +27,8 @@ class ExcelImporterController {
 
         if(dnix!=null){
             if(!dnix.isEmpty()){
-                file.append( "los sieguientes emprendimientos que se cargaron no tienen dni asociado:\n")
-                dnix.each{file.append(  "emprendimiento:"+it.id+"\n")}
+                file.append( "los sieguientes emprendimientos que se cargaron no tienen dni asociado:||")
+                dnix.each{file.append(  "emprendimiento id :"+it.id+"||")}
             }
         }
         List<Emprendimiento> duenox
@@ -39,8 +39,8 @@ class ExcelImporterController {
 
         if(duenox!=null){
             if(!duenox.isEmpty()){\
-                file.append("los sieguientes emprendimientos que se cargaron no tienen nombre del dueño:\n")
-                duenox.each{file.append( "emprendimiento:"+it.id+"\n")}
+                file.append("los sieguientes emprendimientos que se cargaron no tienen nombre del dueño:||")
+                duenox.each{file.append( "emprendimiento id :"+it.id+"||")}
 
 
 
@@ -53,8 +53,8 @@ class ExcelImporterController {
             }}
         if(nombrex!=null){
             if(!nombrex.isEmpty()){
-                file.append( "los sieguientes emprendimientos que se cargaron no tienen nombre del local:\n")
-                nombrex.each{file.append( "emprendimiento:"+it.id+"\n")}
+                file.append( "los sieguientes emprendimientos que se cargaron no tienen nombre del local:||")
+                nombrex.each{file.append( "emprendimiento id :"+it.id+"||")}
 
 
             }
@@ -67,8 +67,8 @@ class ExcelImporterController {
 
         if(direccionx!=null){
             if(!direccionx.isEmpty()){
-                file.append( "los sieguientes emprendimientos que se cargaron no tienen direccion:\n")
-                direccionx.each{file.append( "emprendimiento:"+it.id+"\n")}
+                file.append( "los sieguientes emprendimientos que se cargaron no tienen direccion:||")
+                direccionx.each{file.append( "emprendimiento id :"+it.id+"||")}
             }
         }
           print(file.text)

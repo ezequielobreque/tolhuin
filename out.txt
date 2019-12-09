@@ -1,0 +1,1 @@
+Log de los pequeños problemas encontrados||los sieguientes emprendimientos que se cargaron no tienen dni asociado:||emprendimiento:1||emprendimiento:2||

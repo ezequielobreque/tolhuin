@@ -5,20 +5,10 @@
     <title>Excel Importer</title>
 
     <asset:link rel="icon" href="favicon.ico" type="image/x-ico" />
+    <asset:javascript src="jspdf.min.js"/>
 </head>
-<asset:javascript src="jspdf.min.js"/>
-<script>
-    function generatePDF() {
-        var doc = new jsPDF();
-        doc.setFontSize(16);
-        doc.text(20, 35, 'Nombre:');
-        doc.text(50, 35, '${this.text}');
 
-        // Save the PDF
-        doc.save('document.pdf')
-    }
 
-</script>
 
 <body>
 
@@ -48,11 +38,25 @@
         <input type="text" name="nombre" hidden="true" id="nombre" value="${nombre}">
         <input type="text" name="si" hidden="true" id="si" value=${true}>-->
 
-        <button class="btn btn-primary" onclick="generatePDF()"><i class=""> Generar Log</i></button>
+    <button onclick="generatePDF()" class="btn btn-danger" ><i class="fas fa-file-pdf"> generar Log</i></button>
 
 
 
 
 </div>
+<script>
+    function generatePDF(){
+        var doc = new jsPDF();
+        doc.setFontSize(16);
+        var tex="${text}".split("||");
 
+        for(var i=0;i<tex.length;i++){
+            doc.text(20, (35+(i*10)),tex[i].toString());
+            }
+
+        // Save the PDF
+        doc.save('document.pdf')
+    }
+
+</script>
 </body>
