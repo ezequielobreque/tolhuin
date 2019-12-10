@@ -49,7 +49,7 @@ class ExcelImporterController {
         List<Emprendimiento> nombrex
         if(nombre!=null) {
             if(!nombre.isEmpty()) {
-                nombrex = Emprendimiento.getAll(dueno.replace("[", '').replace(']', '').split(',').toList())
+                nombrex = Emprendimiento.getAll(nombre.replace("[", '').replace(']', '').split(',').toList())
             }}
         if(nombrex!=null){
             if(!nombrex.isEmpty()){
@@ -62,7 +62,7 @@ class ExcelImporterController {
         List<Emprendimiento> direccionx
         if(direccion!=null) {
             if(!direccion.isEmpty()){
-            direccionx = Emprendimiento.getAll(dni.replace("[", '').replace(']', '').split(',').toList())
+            direccionx = Emprendimiento.getAll(direccion.replace("[", '').replace(']', '').split(',').toList())
         }}
 
         if(direccionx!=null){
@@ -72,13 +72,41 @@ class ExcelImporterController {
             }
         }
           print(file.text)
+            List<Emprendimiento> list=[]
 
-          [text:file.text,dni: dni, dueno: dueno, nombre: nombre, direccion: direccion]
+          if(dnix!=null){
+              if(!dnix.isEmpty()){
+                for (Emprendimiento x : dnix){
+
+                    if (!list.contains(x))
+                        list.add(x)
+          }}}
+
+          if(nombrex!=null) {
+              if(!nombrex.isEmpty()) {
+                for (Emprendimiento x : nombrex){
+
+                    if (!list.contains(x))
+                        list.add(x)
+          }}}
+          if(duenox!=null) {
+              if(!duenox.isEmpty()) {
+                for (Emprendimiento x : duenox){
+                    if (!list.contains(x))
+                        list.add(x)
+          }}}
+          if(direccionx!=null) {
+              if(!direccionx.isEmpty()) {
+                for (Emprendimiento x : direccionx){
+                     if (!list.contains(x))
+                          list.add(x)
+          }}}
+          [text:file.text,dni: dni, dueno: dueno, nombre: nombre, direccion: direccion,list: list]
         }
 
         else {
 
-          [text:null,dni: dni, dueno: dueno, nombre: nombre, direccion: direccion]
+          [text:null,dni: dni, dueno: dueno, nombre: nombre, direccion: direccion,list:null]
 
 
       }

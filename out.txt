@@ -1,1 +1,1 @@
-Log de los pequeños problemas encontrados||los sieguientes emprendimientos que se cargaron no tienen dni asociado:||emprendimiento:1||emprendimiento:2||
+Log de los pequeños problemas encontrados||los sieguientes emprendimientos que se cargaron no tienen nombre del local:||emprendimiento id :2||los sieguientes emprendimientos que se cargaron no tienen direccion:||emprendimiento id :1||
