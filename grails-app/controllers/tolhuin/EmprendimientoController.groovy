@@ -78,6 +78,14 @@ class EmprendimientoController {
 
     }
     @Secured(['ROLE_ADMIN','ROLE_MINISTERIO','ROLE_ADMINISTRADOR'])
+    def FiltrosEspeciales(String dni,Boolean sinDni,String direccion,Boolean sinDireccion,String local,Boolean sinLocal,String dueno,Boolean sinDueno){
+
+
+
+
+
+    }
+    @Secured(['ROLE_ADMIN','ROLE_MINISTERIO','ROLE_ADMINISTRADOR'])
     def index() {
      def List=emprendimientoService.list()
         [list:List]

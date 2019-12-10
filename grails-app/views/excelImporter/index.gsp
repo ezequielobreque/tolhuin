@@ -37,13 +37,16 @@
         <input type="text" name="direccion" hidden="true" id="dirreccion" value="${direccion}">
         <input type="text" name="nombre" hidden="true" id="nombre" value="${nombre}">
         <input type="text" name="si" hidden="true" id="si" value=${true}>-->
-    <button onclick="generatePDF()" class="btn btn-danger" ><i class="fas fa-file-pdf"> generar Log</i></button>
-    <form class= method="POST" action="/excelExport/filtro">
-        <button class="btn btn-primary" name="filt" id="filt" value="${this.list.id}"
-                type="submit">
-            <i class="far fa-file-excel"> Generar Excel</i>
-        </button>
-    </form>
+       <g:if test="${params.si == 'true'}">
+           <button onclick="generatePDF()" class="btn btn-danger" ><i class="fas fa-file-pdf"> generar Log</i></button>
+           <form class= method="POST" action="/excelExport/filtro">
+               <button class="btn btn-primary" name="filt" id="filt" value="${this.list.id}"
+                       type="submit">
+                   <i class="far fa-file-excel"> Generar Excel</i>
+               </button>
+           </form>
+       </g:if>
+
 
 
 

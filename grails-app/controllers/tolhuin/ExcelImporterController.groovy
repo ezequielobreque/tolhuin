@@ -18,7 +18,7 @@ class ExcelImporterController {
 
 
 
-        List<Emprendimiento> dnix
+        List<Emprendimiento> dnix=[]
         if(dni!=null) {
             if(!dni.isEmpty()){
             dnix = Emprendimiento.getAll(dni.replace("[", '').replace(']', '').split(',').toList())
@@ -31,7 +31,7 @@ class ExcelImporterController {
                 dnix.each{file.append(  "emprendimiento id :"+it.id+"||")}
             }
         }
-        List<Emprendimiento> duenox
+        List<Emprendimiento> duenox=[]
         if(dueno!=null) {
             if(!dueno.isEmpty()){
             duenox = Emprendimiento.getAll(dueno.replace("[", '').replace(']', '').split(',').toList())
@@ -46,7 +46,7 @@ class ExcelImporterController {
 
             }
         }
-        List<Emprendimiento> nombrex
+        List<Emprendimiento> nombrex=[]
         if(nombre!=null) {
             if(!nombre.isEmpty()) {
                 nombrex = Emprendimiento.getAll(nombre.replace("[", '').replace(']', '').split(',').toList())
@@ -59,7 +59,7 @@ class ExcelImporterController {
 
             }
         }
-        List<Emprendimiento> direccionx
+        List<Emprendimiento> direccionx=[]
         if(direccion!=null) {
             if(!direccion.isEmpty()){
             direccionx = Emprendimiento.getAll(direccion.replace("[", '').replace(']', '').split(',').toList())
@@ -149,10 +149,10 @@ class ExcelImporterController {
                     }
                     values.add(map)
                 }
-                List<Emprendimiento> emprendimientosSinDni
-                List<Emprendimiento> emprendimientosSinDueno
-                List<Emprendimiento> emprendimientosSinNombre
-                List<Emprendimiento> emprendimientosSinDireccion
+                List<Emprendimiento> emprendimientosSinDni =[]
+                List<Emprendimiento> emprendimientosSinDueno=[]
+                List<Emprendimiento> emprendimientosSinNombre=[]
+                List<Emprendimiento> emprendimientosSinDireccion=[]
 
 
 
@@ -225,32 +225,35 @@ class ExcelImporterController {
                             latitud=null}
                         def rubro=Rubro.findByNombre(v.rubro)
 
-                        emprendimientoService.save(Emprendimiento.findByNombre(v.nro)?: new Emprendimiento(usuario:v.nombre,habilitado: true,validado: true,nombre: local,direccion: v.direccion,rubro:rubro,ambito:ambito,longitud: longitud,latitud:latitud,user: user))
-                        def emp= Emprendimiento.findByNombreAndDireccionAndUsuario(local,v.direccion,v.nombre)
+                        def emp=emprendimientoService.save(Emprendimiento.findByNombreAndUsuarioAndDireccion(local,v.nombre,v.direccion)?: new Emprendimiento(usuario:v.nombre,habilitado: true,validado: true,nombre: local,direccion: v.direccion,rubro:rubro,ambito:ambito,longitud: longitud,latitud:latitud,user: user))
+                        println(emp.id)
+                        println(emp.nombre)
+
                         if(user!=null&&user!=[]){
 
                             user.addToEmprendimientos(emp)
 
                         }
-                        if(emp.user!=null){
+
+                        if(user==null||user==[]){
 
 
                             emprendimientosSinDni.add(emp)
 
                         }
-                        if(emp.usuario!=null){
+                        if(v.nombre==null){
 
 
 
                             emprendimientosSinDueno.add(emp)
                         }
-                        if(emp.nombre!=null){
+                        if(v.local==null){
 
 
                             emprendimientosSinNombre.add(emp)
 
                         }
-                        if(emp.direccion!=null){
+                        if(v.direccion==null){
 
                             emprendimientosSinDireccion.add(emp)
 
@@ -260,15 +263,24 @@ class ExcelImporterController {
 
 
 
+
                     }
 
 
                 }
-
-
+                String x=""
+                emprendimientosSinDni.each{x=x+it.id+","}
+                println(x)
+                String x2=""
+                emprendimientosSinDueno.each{x2=x2+it.id+","}
+                String x3=""
+                emprendimientosSinDireccion.each{x3=x3+it.id+","}
+                String x4=""
+                emprendimientosSinNombre.each{x4=x4+it.id+","}
+                print(x4)
 
                 flash.message = "Subscriber imported successfully"
-                redirect action:"index",params: [si: true,dni:emprendimientosSinDni,dueno:emprendimientosSinDueno,nombre:emprendimientosSinNombre,direccion:emprendimientosSinDireccion]
+                redirect action:"index",params: [si: true,dni:x,dueno:x2,nombre:x3,direccion:x4]
             }
         }
 
