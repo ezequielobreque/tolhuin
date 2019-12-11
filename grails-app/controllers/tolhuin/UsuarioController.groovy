@@ -19,7 +19,7 @@ class UsuarioController {
         respond usuarioService.get(id)
 
     }
-    @Secured(['ROLE_ANONYMOUS','ROLE_ADMIN','ROLE_MINISTERIO','ROLE_ADMINISTRADOR'])
+    @Secured(['ROLE_ANONYMOUS','ROLE_ADMIN','ROLE_ADMINISTRADOR'])
     def create() {
 
        respond new Usuario(params)
@@ -108,11 +108,11 @@ class UsuarioController {
     }
 
 
-
+    @Secured(['ROLE_ADMIN','ROLE_ADMINISTRADOR'])
     def edit(Long id) {
         respond usuarioService.get(id)
     }
-
+    @Secured(['ROLE_ADMIN','ROLE_ADMINISTRADOR'])
     def update(Usuario usuario) {
         if (usuario == null) {
             notFound()

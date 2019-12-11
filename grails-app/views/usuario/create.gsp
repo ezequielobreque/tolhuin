@@ -17,15 +17,23 @@
                     <label for="tipo">tipo
                         <span class="required-indicator">*</span>
                     </label>
-
+                    <sec:ifAnyGranted roles='ROLE_ADMIN,ROLE_ADMINISTRADOR'>
                     <select name="tipo" id="tipo">
-                <sec:ifAnyGranted roles='ROLE_MINISTERIO,ROLE_ADMIN,ROLE_ADMINISTRADOR'>
+
                     <option value="administrador">administrador</option>
                     <option value="municipalidad">municipalidad</option>
-                </sec:ifAnyGranted>
+
+
+
                         <option value="emprendedor">emprendedor</option>
                         <option value="investigador">investigador</option>
                     </select>
+                </sec:ifAnyGranted>
+                    <sec:ifAnyGranted roles="ROLE_ANONYMOUS">
+                        <input value="emprendedor" type="hidden" name="tipo" id="tipo">
+                    </sec:ifAnyGranted>
+
+
                     <br>
                     <div class="fieldcontain required">
                         <label for="password">Contraseña

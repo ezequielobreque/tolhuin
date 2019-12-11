@@ -78,8 +78,99 @@ class EmprendimientoController {
 
     }
     @Secured(['ROLE_ADMIN','ROLE_MINISTERIO','ROLE_ADMINISTRADOR'])
-    def FiltrosEspeciales(String dni,Boolean sinDni,String direccion,Boolean sinDireccion,String local,Boolean sinLocal,String dueno,Boolean sinDueno){
+    def FiltrosEspeciales(String rubro,String ambito,String sector ,String dni,Boolean sinDni,String direccion,Boolean sinDireccion,String local,Boolean sinLocal,String dueno,Boolean sinDueno,Boolean solo){
+        def amb=Ambito.findByNombreLike('%'+ambito+'%')
+        def rub=Rubro.findByNombreLike('%'+rubro+'%')
 
+        def sec=Sector.findByNombreLike('%'+sector+'%')
+        def dniX
+        if (dni!=null) {
+            dniX = Usuario.findByDniLike(dni.toLong())
+        }
+
+        print (sinDni)
+        List<Emprendimiento> List=Emprendimiento.findAllByNombreLike('%' + local + '%')
+        /*if (amb!=null && rub!=null) {
+
+            List = Emprendimiento.findAllByNombreLikeAndAmbitoAndRubro('%' + buscar + '%', amb, rub)
+        }else
+            if(amb!=null&& rub==null){
+
+                List = Emprendimiento.findAllByNombreLikeAndAmbito('%' + buscar + '%', amb)
+            }
+        else if(rub!=null && amb==null){
+
+                List = Emprendimiento.findAllByNombreLikeAndRubro('%' + buscar + '%', rub)
+
+            }else if(rub==null && amb==null)
+                {
+
+                    List = Emprendimiento.findAllByNombreLike('%' + buscar + '%')
+
+                }*/
+        if (amb!=null){
+
+            List=List.findAll { it.ambito == amb }
+
+        }
+
+
+
+        if (rub!=null){
+            List=List.findAll { it.rubro == rub }
+
+        }
+        if (sec!=null) {
+
+
+            print(List.rubro.sector.nombre)
+            List=List.findAll { it.rubro.sector.nombre == sec.nombre }
+
+        }
+        if (direccion!=null){
+
+            List=List.findAll{it.direccion =~ direccion}
+        }
+        if (dueno!=null){
+
+            List=List.findAll{it.usuario =~ dueno}
+        }
+
+        if (solo){
+            if (sinDni){
+                List=Emprendimiento.findAllByUser(null)
+            }
+            if (sinDireccion){
+                List=Emprendimiento.findAllByDireccion(null)
+            }
+            if (sinDueno){
+                List=Emprendimiento.findAllByUsuario(null)
+            }
+
+
+
+
+        }
+        if (sinDni){
+            List=List.findAll {it.user==null}
+        }
+
+        if (dniX!=null){
+
+            List=List.findAll { if(it.user!=null){ it.user == dniX} }
+
+        }
+        if (sinDueno){
+            List=List.findAll {it.usuario==null}
+        }
+        if (sinDireccion){
+            List=List.findAll {it.direccion==null}
+        }
+
+
+
+
+        [list:List]
 
 
 
