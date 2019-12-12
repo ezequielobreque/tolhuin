@@ -100,6 +100,9 @@
 				</div>
 			</div>
 			<div class="card-body">
+				<g:if test="${params.login_error}==1">
+					<a style="color: red">Error al autentificar intenta denuevo</a>
+				</g:if>
 				<form action="/login/authenticate" method="POST" id="loginForm" autocomplete="off">
 					<div class="input-group form-group">
 						<div class="input-group-prepend">
