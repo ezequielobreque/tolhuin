@@ -14,10 +14,11 @@
                 <fieldset class="form">
                     <f:all bean="usuario" except="tipo,contactos"/>
                     <div class="crear">
+                    <sec:ifAnyGranted roles='ROLE_ADMIN,ROLE_ADMINISTRADOR'>
                     <label for="tipo">tipo
                         <span class="required-indicator">*</span>
                     </label>
-                    <sec:ifAnyGranted roles='ROLE_ADMIN,ROLE_ADMINISTRADOR'>
+
                     <select name="tipo" id="tipo">
 
                     <option value="administrador">administrador</option>
@@ -34,7 +35,7 @@
                     </sec:ifAnyGranted>
 
 
-                    <br>
+                    
                     <div class="fieldcontain required">
                         <label for="password">Contraseña
                             <span class="required-indicator">*</span>

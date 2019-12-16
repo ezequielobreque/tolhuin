@@ -113,9 +113,9 @@
 			<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 				<div class="bg-white py-2 collapse-inner rounded">
 					<h6 class="collapse-header">Opciones:</h6>
-					<sec:ifAnyGranted roles='ROLE_INVESTIGADOR,ROLE_MINISTERIO,ROLE_ADMIN,ROLE_ADMINISTRADOR'>
+
 					<a class="collapse-item" href="/emprendimiento/index">Lista de Emprendimientos</a>
-					</sec:ifAnyGranted>
+
 						<a class="collapse-item" href="/main/Emprendimientos">Emprendimientos Populares</a>
 					<sec:ifNotGranted roles='ROLE_ANONYMOUS'>
 					<a class="collapse-item" href="/emprendimiento/create">Nuevo Emprendimiento</a>
@@ -123,6 +123,7 @@
 					</sec:ifNotGranted>
 					<sec:ifAnyGranted roles='ROLE_MINISTERIO,ROLE_ADMIN,ROLE_ADMINISTRADOR'>
 						<a class="collapse-item" href="/excelImporter/index">Importar excel</a>
+						<a class="collapse-item" href="/emprendimiento/FiltrosEspeciales">Filtros Especiales</a>
 					</sec:ifAnyGranted>
 				</div>
 			</div>
@@ -151,14 +152,18 @@
 			</div>
 		</li>
 
-<sec:ifAnyGranted roles='ROLE_MINISTERIO,ROLE_INVESTIGADOR,ROLE_ADMIN,ROLE_ADMINISTRADOR'>
 		<!-- Nav Item - Tables -->
 		<li class="nav-item">
 			<a class="nav-link" href="/grafico/index">
 				<i class="fas fa-fw fa-chart-area"></i>
 				<span>Graficos</span></a>
 		</li>
-  </sec:ifAnyGranted>
+	<li class="nav-item">
+		<a class="nav-link" href="/usuario/ayuda">
+			<i class="fas fa-question-circle"></i>
+			<span>Ayuda</span></a>
+	</li>
+
 	`<sec:ifAnyGranted roles='ROLE_MINISTERIO,ROLE_ADMIN,ROLE_ADMINISTRADOR'>
 
 		<li class="nav-item">
@@ -355,23 +360,19 @@
 						</a>
 						<!-- Dropdown - User Information -->
 						<div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-							<a class="dropdown-item" href="#">
-								<i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-								Profile
-							</a>
-							<a class="dropdown-item" href="#">
+							<a class="dropdown-item" href="/usuario/misEmprendimientos">
 								<i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-								Settings
-							</a>
-							<a class="dropdown-item" href="#">
-								<i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-								Activity Log
+								Mis emprendimientos
 							</a>
 							<div class="dropdown-divider"></div>
-							<a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-								<i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-								Logout
-							</a>
+
+						<g:link class="dropdown-item" controller="logout">
+							<i class="fas fa-sign-out-alt">cerrar sesion</i>
+						</g:link>
+
+
+
+
 						</div>
 					</li>
 

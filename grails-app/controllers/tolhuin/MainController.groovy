@@ -26,9 +26,15 @@ class MainController {
 	}
 	def Emprendimientos() {
 
-		def Emp=Emprendimiento.findAllByValidado(true)
+		List<Emprendimiento> Emp=Emprendimiento.findAllByValidado(true)
 
-		[Emp:Emp]
+
+		Emp.sort{y,x->x.visitas<=>y.visitas}
+		List<Emprendimiento> Emp2=[]
+		for(int i = 0; i < 8; i++) {
+			Emp2.add(Emp.get(i))
+		}
+		[Emp:Emp2]
 
 		/*User us=authenticatedUser
             print(	us.getAuthorities())*/

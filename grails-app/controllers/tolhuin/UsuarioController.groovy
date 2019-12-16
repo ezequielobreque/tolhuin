@@ -35,6 +35,11 @@ class UsuarioController {
 
         [lista:lista]
     }
+
+    @Secured(['ROLE_ANONYMOUS','ROLE_ADMIN','ROLE_MINISTERIO','ROLE_ADMINISTRADOR','ROLE_EMPRENDEDOR','ROLE_INVESTIGADOR'])
+    def ayuda(){
+
+    }
     @Secured(['ROLE_ANONYMOUS','ROLE_ADMIN','ROLE_MINISTERIO','ROLE_ADMINISTRADOR'])
     def save(Usuario usuario) {
         if (usuario == null) {

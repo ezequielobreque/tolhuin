@@ -22,10 +22,11 @@ class Emprendimiento {
     String featuredImageContentType
     Usuario user
     String usuario
+    int visitas=0
     static constraints = {
 
         nombre display:true,nullable: true ,unique:['direccion','usuario']
-        usuario display:true,nullable: true ,unique: ['direccion','nombre']
+        usuario display:true,nullable: true
         user display:false,nullable: true
         latitud display: true, nullable:true
         longitud display: true, nullable:true
@@ -41,6 +42,7 @@ class Emprendimiento {
         investigador display: false, nullable:true
         featuredImageBytes nullable: true
         featuredImageContentType nullable: true
+        visitas nullable: true
     }
     static mapping = {
         featuredImageBytes column: 'featured_image_bytes', sqlType: 'longblob'

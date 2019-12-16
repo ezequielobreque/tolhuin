@@ -34,10 +34,8 @@ class ExcelExportController{
 
             emprendimientos = emprendimientos.findAll { it.validado }
 
-
-        def headers = ['nombre', 'local', 'celular', 'direccion', 'rubro', 'ambito', 'sector']
-        def withProperties = ['usuario', 'nombre', 'telefono', 'direccion', 'rubro.nombre', 'ambito.nombre', 'rubro.sector.nombre']
-
+        def headers = ['nro','nombre', 'local', 'celular', 'direccion', 'rubro','detalle', 'ambito', 'sector','dni']
+        def withProperties = ['id','usuario', 'nombre', 'telefono', 'direccion', 'rubro.nombre','descripcion', 'ambito.nombre', 'rubro.sector.nombre','user.dni']
         new WebXlsxExporter().with {
             setResponseHeaders(response)
             fillHeader(headers)

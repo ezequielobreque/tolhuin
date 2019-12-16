@@ -5,7 +5,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook
 import static com.lowagie.text.Cell.*
 import java.io.File
 import groovy.json.*
-@Secured(['ROLE_ANONYMOUS','ROLE_ADMIN'])
+@Secured(['ROLE_MINISTERIO','ROLE_ADMIN'])
 class ExcelImporterController {
 
     EmprendimientoService emprendimientoService
@@ -113,6 +113,7 @@ class ExcelImporterController {
 
 
             }
+
         def uploadFile() {
             def file = request.getFile('excelFile')
             if(!file.empty) {
@@ -182,12 +183,14 @@ class ExcelImporterController {
                         }*/
 
                         Usuario user=Usuario.findByDni(v.dni)
+                        println(user)
                         def rubros=Rubro.findAll()
                         print(user)
-                        def local=v.local;
+                        String local=v.local;
                         print(v.local)
                         if (local==null){
                             local="negocio de " + v.nombre+".Dir: "+v.direccion
+
                         }
                         def ambito=Ambito.findByNombre(v.ambito)
                         def sector= Sector.findByNombre(v.sector)
@@ -198,13 +201,13 @@ class ExcelImporterController {
                         }
 
 
-                        def latitud
-                        def longitud
+                        Double latitud
+                        Double longitud
                         String direcion
                         if(v.direccion!=null){
                         direcion=v.direccion
                         String dire= direcion.replaceAll("[^A-Za-z0-9]", "+")
-                        print(dire)
+                        println(dire)
                         def get = new URL("https://geocoder.api.here.com/6.2/geocode.json?app_id=yRbrv8bfdmGRDhUlolXl&app_code=LzSuSfgDM53H-Bc1YCMU-g&searchtext=" +dire+ "+tolhuin+tierra+del+fuego").openConnection();
                         def getRC = get.getResponseCode();
                             println(getRC)
@@ -224,12 +227,17 @@ class ExcelImporterController {
                             }}else{longitud=null
                             latitud=null}
                         def rubro=Rubro.findByNombre(v.rubro)
+                        String dueno=v.nombre
 
-                        def emp=emprendimientoService.save(Emprendimiento.findByNombreAndUsuarioAndDireccion(local,v.nombre,v.direccion)?: new Emprendimiento(usuario:v.nombre,habilitado: true,validado: true,nombre: local,direccion: v.direccion,rubro:rubro,ambito:ambito,longitud: longitud,latitud:latitud,user: user))
-                        println(emp.id)
-                        println(emp.nombre)
 
+
+
+                        def emp=emprendimientoService.save(Emprendimiento.findWhere(usuario:dueno,habilitado: true,validado: true,nombre:local,direccion: v.direccion,rubro:rubro,ambito:ambito,longitud: longitud,latitud:latitud,user: user)?: new Emprendimiento(usuario:dueno,habilitado: true,validado: true,nombre:local,direccion: v.direccion,rubro:rubro,ambito:ambito,longitud: longitud,latitud:latitud,user: user))
+
+
+                        println(emp)
                         if(user!=null&&user!=[]){
+                            println('llege')
 
                             user.addToEmprendimientos(emp)
 

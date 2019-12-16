@@ -33,7 +33,7 @@
             <g:form resource="${this.emprendimiento}" method="PUT">
                 <g:hiddenField name="version" value="${this.emprendimiento?.version}" />
                 <fieldset class="form" style="text-align: initial">
-                    <f:all bean="emprendimiento" except="featuredImageBytes,featuredImageContentType,longitud,latitud"/>
+                    <f:all bean="emprendimiento" except="featuredImageBytes,featuredImageContentType,visitas,longitud,latitud"/>
                 <sec:ifAnyGranted roles="ROLE_MINISTERIO,ROLE_ADMIN,ROLE_ADMINISTRADOR">
                     <div class="fieldcontain"><label for="validado">validado</label><input type="hidden" name="_validado"><input type="checkbox"
                         <g:if test="${this.emprendimiento.validado==true}">

@@ -78,19 +78,25 @@ class EmprendimientoController {
 
     }
     @Secured(['ROLE_ADMIN','ROLE_MINISTERIO','ROLE_ADMINISTRADOR'])
-    def FiltrosEspeciales(String rubro,String ambito,String sector ,String dni,Boolean sinDni,String direccion,Boolean sinDireccion,String local,Boolean sinLocal,String dueno,Boolean sinDueno,Boolean solo){
-        def amb=Ambito.findByNombreLike('%'+ambito+'%')
-        def rub=Rubro.findByNombreLike('%'+rubro+'%')
+    def FiltrosEspeciales(String id,String rubro,String ambito,String sector ,String dni,Boolean sinDni,String direccion,Boolean sinDireccion,String local,Boolean sinLocal,String dueno,Boolean sinDueno,Boolean solo){
 
-        def sec=Sector.findByNombreLike('%'+sector+'%')
-        def dniX
-        if (dni!=null) {
-            dniX = Usuario.findByDniLike(dni.toLong())
-        }
+            def amb = Ambito.findByNombreLike('%' + ambito + '%')
+            def rub = Rubro.findByNombreLike('%' + rubro + '%')
 
-        print (sinDni)
-        List<Emprendimiento> List=Emprendimiento.findAllByNombreLike('%' + local + '%')
-        /*if (amb!=null && rub!=null) {
+            def sec = Sector.findByNombreLike('%' + sector + '%')
+            def dniX
+            if (dni != null) {
+                dniX = Usuario.findByDniLike(dni.toLong())
+            }
+            def idx
+            if(id!=''){
+                idx=id
+            }
+            print(sinDni)
+        List<Emprendimiento> List = Emprendimiento.findAllByNombreLike('%' + local + '%')
+        if (solo==false) {
+
+            /*if (amb!=null && rub!=null) {
 
             List = Emprendimiento.findAllByNombreLikeAndAmbitoAndRubro('%' + buscar + '%', amb, rub)
         }else
@@ -108,35 +114,58 @@ class EmprendimientoController {
                     List = Emprendimiento.findAllByNombreLike('%' + buscar + '%')
 
                 }*/
-        if (amb!=null){
+            if (amb != null) {
 
-            List=List.findAll { it.ambito == amb }
+                List = List.findAll { it.ambito == amb }
 
+            }
+
+
+            if (rub != null) {
+                List = List.findAll { it.rubro == rub }
+
+            }
+            if (sec != null) {
+
+
+                print(List.rubro.sector.nombre)
+                List = List.findAll { it.rubro.sector.nombre == sec.nombre }
+
+            }
+            if (direccion != null) {
+
+                List = List.findAll { it.direccion =~ direccion }
+            }
+            if (dueno != null) {
+
+                List = List.findAll { it.usuario =~ dueno }
+            }
+
+
+            if (sinDni) {
+                List = List.findAll { it.user == null }
+            }
+
+            if (dniX != null) {
+
+                List = List.findAll {
+                    if (it.user != null) {
+                        it.user == dniX
+                    }
+                }
+
+            }
+            if (sinDueno) {
+                List = List.findAll { it.usuario == null }
+            }
+            if (sinDireccion) {
+                List = List.findAll { it.direccion == null }
+            }
+            if(idx!=null){
+                List=Emprendimiento.findAllById(idx)
+            }
         }
-
-
-
-        if (rub!=null){
-            List=List.findAll { it.rubro == rub }
-
-        }
-        if (sec!=null) {
-
-
-            print(List.rubro.sector.nombre)
-            List=List.findAll { it.rubro.sector.nombre == sec.nombre }
-
-        }
-        if (direccion!=null){
-
-            List=List.findAll{it.direccion =~ direccion}
-        }
-        if (dueno!=null){
-
-            List=List.findAll{it.usuario =~ dueno}
-        }
-
-        if (solo){
+        else{
             if (sinDni){
                 List=Emprendimiento.findAllByUser(null)
             }
@@ -151,21 +180,6 @@ class EmprendimientoController {
 
 
         }
-        if (sinDni){
-            List=List.findAll {it.user==null}
-        }
-
-        if (dniX!=null){
-
-            List=List.findAll { if(it.user!=null){ it.user == dniX} }
-
-        }
-        if (sinDueno){
-            List=List.findAll {it.usuario==null}
-        }
-        if (sinDireccion){
-            List=List.findAll {it.direccion==null}
-        }
 
 
 
@@ -176,13 +190,17 @@ class EmprendimientoController {
 
 
     }
-    @Secured(['ROLE_ADMIN','ROLE_MINISTERIO','ROLE_ADMINISTRADOR'])
+    @Secured(['ROLE_ANONYMOUS','ROLE_ADMIN','ROLE_MINISTERIO','ROLE_INVESTIGADOR','ROLE_ADMINISTRADOR','ROLE_EMPRENDEDOR'])
     def index() {
+
      def List=emprendimientoService.list()
         [list:List]
     }
 
     def show(Long id) {
+        def N= Emprendimiento.get(id).visitas
+        emprendimientoService.get(id).visitas=N+1
+        emprendimientoService.save(emprendimientoService.get(id))
         respond emprendimientoService.get(id)
     }
     @Secured(['ROLE_ADMIN','ROLE_MINISTERIO','ROLE_INVESTIGADOR','ROLE_ADMINISTRADOR','ROLE_EMPRENDEDOR'])

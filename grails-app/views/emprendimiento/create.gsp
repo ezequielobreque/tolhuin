@@ -48,8 +48,13 @@
                     <div class="fieldcontain">
                         <label for="usuario">Nombre del dueño </label><input type="text" name="usuario" value="" id="usuario">
                     </div>
-                    <f:all bean="emprendimiento" except="longitud,latitud,featuredImageBytes,habilitado,featuredImageContentType,usuario,nombre"/>
+                    <f:all bean="emprendimiento" except="visitas,descripcion,longitud,latitud,featuredImageBytes,habilitado,featuredImageContentType,usuario,nombre"/>
 
+
+                    <div class="fieldcontain">
+                        <label for="descripcion">Descripcion</label>
+                    <textarea id="descripcion" name="descripcion" aria-label="descripcion"></textarea>
+                    </div>
                     <div class="crear">
                         <label for="habilitado">Emprendimiento habilitado</label>
                     <input type="hidden" name="_habilitado"><input type="checkbox" name="habilitado" id="habilitado">

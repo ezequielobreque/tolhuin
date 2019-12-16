@@ -6,15 +6,8 @@
         <title><g:message code="default.edit.label" args="[entityName]" /></title>
     </head>
     <body>
-        <a href="#edit-emprendimiento" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-        <div class="nav" role="navigation">
-            <ul>
-                <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-                <li><g:link class="list" action="index"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-                <li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
-            </ul>
-        </div>
-        <div id="edit-emprendimiento" class="content scaffold-edit" role="main">
+
+    <div id="show-emprendimiento" class="contentShow" role="main">
             <h1><g:message code="default.edit.label" args="[entityName]" /></h1>
             <g:if test="${flash.message}">
             <div class="message" role="status">${flash.message}</div>
@@ -29,9 +22,9 @@
             <g:uploadForm name="uploadFeaturedImage" action="uploadFeaturedImage">
                 <g:hiddenField name="id" value="${this.emprendimiento?.id}" />
                 <g:hiddenField name="version" value="${this.emprendimiento?.version}" />
-                <input type="file" name="featuredImageFile" />
-                <fieldset class="buttons">
-                    <input class="save" type="submit" value="${message(code: 'emprendimiento.featuredImage.upload.label', default: 'Upload')}" />
+                <input class="btn btn-outline-primary" style="background-color:#f1c40f;color: black" type="file" name="featuredImageFile" />
+                <fieldset class="botonesDelShow">
+                    <i class="fas fa-upload"></i><input class="btn btn-secondary" type="submit" value="${message(code: 'emprendimiento.featuredImage.upload.label', default: 'Upload')}" />
                 </fieldset>
             </g:uploadForm>
         </div>
